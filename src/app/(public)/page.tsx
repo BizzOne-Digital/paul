@@ -1,0 +1,133 @@
+import type { Metadata } from "next";
+import { HomeHero } from "@/components/home/HomeHero";
+import { HomeIntroduction } from "@/components/home/HomeIntroduction";
+import { HomeAcquisitionCategories } from "@/components/home/HomeAcquisitionCategories";
+import { HomeBuyerServices } from "@/components/home/HomeBuyerServices";
+import { HomeAcquisitionJourney } from "@/components/home/HomeAcquisitionJourney";
+import { HomeDueDiligence } from "@/components/home/HomeDueDiligence";
+import { HomeRegions } from "@/components/home/HomeRegions";
+import { HomeConsultationCta } from "@/components/home/HomeConsultationCta";
+import { HomeInsightsPreview } from "@/components/home/HomeInsightsPreview";
+import { HomeFaqPreview } from "@/components/home/HomeFaqPreview";
+import { HomeFinalCta } from "@/components/home/HomeFinalCta";
+import {
+  getPageBySlug,
+  getPublishedFaqs,
+  getPublishedPosts,
+  getPublishedServices,
+  getSection,
+} from "@/lib/data";
+import { getSettings } from "@/lib/settings";
+import { absoluteUrl } from "@/lib/utils";
+import { mediaUrl } from "@/lib/media";
+import { STOCK } from "@/lib/images";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, settings] = await Promise.all([
+    getPageBySlug("home"),
+    getSettings(),
+  ]);
+
+  const title =
+    page?.seo?.title ||
+    settings.defaultSeoTitle ||
+    "Want to Buy a BC Winery?";
+  const description =
+    page?.seo?.description || settings.defaultSeoDescription;
+  const ogImage = mediaUrl(page?.hero?.backgroundImage);
+
+  return {
+    title,
+    description,
+    alternates: { canonical: absoluteUrl("/") },
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl("/"),
+      images: ogImage ? [{ url: ogImage }] : undefined,
+    },
+  };
+}
+
+export default async function HomePage() {
+  const [page, services, posts, faqs, settings] = await Promise.all([
+    getPageBySlug("home"),
+    getPublishedServices(),
+    getPublishedPosts({ limit: 3 }),
+    getPublishedFaqs(4),
+    getSettings(),
+  ]);
+
+  const cmsHero = page?.hero || {};
+  const cmsBg = cmsHero.backgroundImage
+    ? String(
+        typeof cmsHero.backgroundImage === "string"
+          ? cmsHero.backgroundImage
+          : (cmsHero.backgroundImage as { url?: string }).url || "",
+      )
+    : "";
+
+  const hero = {
+    eyebrow: "British Columbia Winery Buyer Guidance",
+    heading: "Want to Buy a BC Winery?",
+    subheading:
+      "Independent information and professional consulting support for buyers exploring wineries, vineyards, and wine-country opportunities across British Columbia.",
+    primaryCtaLabel: settings.headerCtaLabel || "Book a Complimentary Call",
+    primaryCtaHref: settings.headerCtaHref || "/contact",
+    secondaryCtaLabel: "Explore Buyer Services",
+    secondaryCtaHref: "/services",
+    backgroundImageAlt:
+      "Sunset over a British Columbia vineyard and winery estate — illustrative atmosphere, not a listed property",
+    floatingLabel: "British Columbia Wine Country",
+    ...cmsHero,
+    // Prefer uploaded CMS art; otherwise use the cinematic local hero photo
+    backgroundImage: cmsBg.startsWith("/uploads/")
+      ? cmsBg
+      : STOCK.heroVineyard,
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: settings.websiteName,
+    description: settings.companyDescription,
+    url: absoluteUrl("/"),
+    email: settings.email,
+    telephone: settings.phoneTel || settings.phone,
+    areaServed: settings.serviceArea,
+    image: settings.logo,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <HomeHero hero={hero} />
+      <HomeIntroduction section={getSection(page, "introduction")} />
+      <HomeAcquisitionCategories
+        section={getSection(page, "acquisition-categories")}
+      />
+      <HomeBuyerServices
+        section={getSection(page, "buyer-services")}
+        services={services}
+      />
+      <HomeAcquisitionJourney
+        section={getSection(page, "acquisition-journey")}
+      />
+      <HomeDueDiligence section={getSection(page, "due-diligence")} />
+      <HomeRegions section={getSection(page, "regions")} />
+      <HomeConsultationCta section={getSection(page, "consultation-cta")} />
+      <HomeInsightsPreview
+        section={getSection(page, "insights-preview")}
+        posts={posts}
+      />
+      <HomeFaqPreview
+        section={getSection(page, "faq-preview")}
+        faqs={faqs}
+      />
+      <HomeFinalCta section={getSection(page, "final-cta")} />
+    </>
+  );
+}

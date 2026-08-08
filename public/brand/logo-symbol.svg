@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" role="img" aria-label="BC Winery Buyer Advisory">
+  <defs>
+    <linearGradient id="gLeft" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#211328"/>
+      <stop offset="55%" stop-color="#32173D"/>
+      <stop offset="100%" stop-color="#B9A7D8"/>
+    </linearGradient>
+    <linearGradient id="gRight" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#4A102D"/>
+      <stop offset="55%" stop-color="#741F45"/>
+      <stop offset="100%" stop-color="#B42A61"/>
+    </linearGradient>
+    <linearGradient id="gBottom" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#32173D"/>
+      <stop offset="100%" stop-color="#741F45"/>
+    </linearGradient>
+    <clipPath id="c1"><circle cx="42" cy="38" r="14"/></clipPath>
+    <clipPath id="c2"><circle cx="78" cy="38" r="14"/></clipPath>
+    <clipPath id="c3"><circle cx="28" cy="68" r="14"/></clipPath>
+    <clipPath id="c4"><circle cx="92" cy="68" r="14"/></clipPath>
+    <clipPath id="c5"><circle cx="42" cy="90" r="14"/></clipPath>
+    <clipPath id="c6"><circle cx="78" cy="90" r="14"/></clipPath>
+    <clipPath id="c7"><circle cx="60" cy="112" r="14"/></clipPath>
+  </defs>
+  <!-- stem -->
+  <path d="M48 28 C40 18 34 12 28 10 C38 8 52 14 58 24" stroke="#181619" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+  <!-- grapes -->
+  <g>
+    <circle cx="42" cy="38" r="14" fill="#F7F3EC"/>
+    <ellipse cx="36" cy="38" rx="9" ry="12" fill="url(#gLeft)" clip-path="url(#c1)"/>
+    <circle cx="42" cy="38" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="78" cy="38" r="14" fill="#F7F3EC"/>
+    <ellipse cx="84" cy="38" rx="9" ry="12" fill="url(#gRight)" clip-path="url(#c2)"/>
+    <circle cx="78" cy="38" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="28" cy="68" r="14" fill="#F7F3EC"/>
+    <ellipse cx="22" cy="68" rx="9" ry="12" fill="url(#gLeft)" clip-path="url(#c3)"/>
+    <circle cx="28" cy="68" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="92" cy="68" r="14" fill="#F7F3EC"/>
+    <ellipse cx="98" cy="68" rx="9" ry="12" fill="url(#gRight)" clip-path="url(#c4)"/>
+    <circle cx="92" cy="68" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="42" cy="90" r="14" fill="#F7F3EC"/>
+    <ellipse cx="36" cy="90" rx="9" ry="12" fill="url(#gLeft)" clip-path="url(#c5)"/>
+    <circle cx="42" cy="90" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="78" cy="90" r="14" fill="#F7F3EC"/>
+    <ellipse cx="84" cy="90" rx="9" ry="12" fill="url(#gRight)" clip-path="url(#c6)"/>
+    <circle cx="78" cy="90" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="60" cy="112" r="14" fill="#F7F3EC"/>
+    <ellipse cx="56" cy="112" rx="9" ry="12" fill="url(#gBottom)" clip-path="url(#c7)"/>
+    <circle cx="60" cy="112" r="14" stroke="#181619" stroke-width="4"/>
+  </g>
+  <!-- house -->
+  <path d="M48 78 L60 66 L72 78 V90 H48 Z" fill="#741F45" stroke="#181619" stroke-width="3.5" stroke-linejoin="round"/>
+  <rect x="56" y="82" width="8" height="8" fill="#F7F3EC"/>
+</svg>

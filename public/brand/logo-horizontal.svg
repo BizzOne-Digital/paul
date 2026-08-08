@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" fill="none" role="img" aria-label="BC Winery Buyer Advisory">
+  <defs>
+    <linearGradient id="hgLeft" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#211328"/>
+      <stop offset="55%" stop-color="#32173D"/>
+      <stop offset="100%" stop-color="#B9A7D8"/>
+    </linearGradient>
+    <linearGradient id="hgRight" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#4A102D"/>
+      <stop offset="55%" stop-color="#741F45"/>
+      <stop offset="100%" stop-color="#B42A61"/>
+    </linearGradient>
+    <linearGradient id="hgBottom" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#32173D"/>
+      <stop offset="100%" stop-color="#741F45"/>
+    </linearGradient>
+    <clipPath id="hc1"><circle cx="42" cy="38" r="14"/></clipPath>
+    <clipPath id="hc2"><circle cx="78" cy="38" r="14"/></clipPath>
+    <clipPath id="hc3"><circle cx="28" cy="68" r="14"/></clipPath>
+    <clipPath id="hc4"><circle cx="92" cy="68" r="14"/></clipPath>
+    <clipPath id="hc5"><circle cx="42" cy="90" r="14"/></clipPath>
+    <clipPath id="hc6"><circle cx="78" cy="90" r="14"/></clipPath>
+    <clipPath id="hc7"><circle cx="60" cy="112" r="14"/></clipPath>
+  </defs>
+  <g transform="translate(0,0)">
+    <path d="M48 28 C40 18 34 12 28 10 C38 8 52 14 58 24" stroke="#181619" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+    <circle cx="42" cy="38" r="14" fill="#F7F3EC"/><ellipse cx="36" cy="38" rx="9" ry="12" fill="url(#hgLeft)" clip-path="url(#hc1)"/><circle cx="42" cy="38" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="78" cy="38" r="14" fill="#F7F3EC"/><ellipse cx="84" cy="38" rx="9" ry="12" fill="url(#hgRight)" clip-path="url(#hc2)"/><circle cx="78" cy="38" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="28" cy="68" r="14" fill="#F7F3EC"/><ellipse cx="22" cy="68" rx="9" ry="12" fill="url(#hgLeft)" clip-path="url(#hc3)"/><circle cx="28" cy="68" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="92" cy="68" r="14" fill="#F7F3EC"/><ellipse cx="98" cy="68" rx="9" ry="12" fill="url(#hgRight)" clip-path="url(#hc4)"/><circle cx="92" cy="68" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="42" cy="90" r="14" fill="#F7F3EC"/><ellipse cx="36" cy="90" rx="9" ry="12" fill="url(#hgLeft)" clip-path="url(#hc5)"/><circle cx="42" cy="90" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="78" cy="90" r="14" fill="#F7F3EC"/><ellipse cx="84" cy="90" rx="9" ry="12" fill="url(#hgRight)" clip-path="url(#hc6)"/><circle cx="78" cy="90" r="14" stroke="#181619" stroke-width="4"/>
+    <circle cx="60" cy="112" r="14" fill="#F7F3EC"/><ellipse cx="56" cy="112" rx="9" ry="12" fill="url(#hgBottom)" clip-path="url(#hc7)"/><circle cx="60" cy="112" r="14" stroke="#181619" stroke-width="4"/>
+    <path d="M48 78 L60 66 L72 78 V90 H48 Z" fill="#741F45" stroke="#181619" stroke-width="3.5" stroke-linejoin="round"/>
+    <rect x="56" y="82" width="8" height="8" fill="#F7F3EC"/>
+  </g>
+  <text x="140" y="62" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#211328" letter-spacing="0.5">BC Winery Buyer Advisory</text>
+  <text x="140" y="92" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#741F45" letter-spacing="3" text-transform="uppercase">GUIDANCE FOR BC WINERY BUYERS</text>
+</svg>

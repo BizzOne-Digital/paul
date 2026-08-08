@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  --color-aubergine: #211328;
+  --color-plum: #32173d;
+  --color-lavender: #b9a7d8;
+  --color-lavender-soft: #ddd3ea;
+  --color-burgundy: #741f45;
+  --color-cabernet: #4a102d;
+  --color-berry: #b42a61;
+  --color-ivory: #f7f3ec;
+  --color-champagne: #b5965a;
+  --color-charcoal: #181619;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  --font-label: var(--font-manrope), "Manrope", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-sans antialiased;
+    background-color: #f7f3ec;
+    color: #181619;
+    overflow-x: clip;
+    max-width: 100%;
+    position: relative;
+  }
+
+  /* Prevent accidental horizontal page scroll on mobile */
+  #main-content,
+  .site-shell {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, #b9a7d8 55%, white);
+    color: #211328;
+  }
+
+  :focus-visible {
+    outline: 2px solid #b9a7d8;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-label {
+    font-family: var(--font-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain {
+    position: relative;
+  }
+
+  .grain::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .vineyard-lines {
+    background-image: repeating-linear-gradient(
+      105deg,
+      transparent 0,
+      transparent 18px,
+      color-mix(in oklab, #b5965a 18%, transparent) 18px,
+      color-mix(in oklab, #b5965a 18%, transparent) 19px
+    );
+  }
+
+  .grape-pattern {
+    background-image: radial-gradient(
+        circle at 20% 30%,
+        color-mix(in oklab, #b9a7d8 12%, transparent) 0 1.5px,
+        transparent 2px
+      ),
+      radial-gradient(
+        circle at 70% 60%,
+        color-mix(in oklab, #741f45 10%, transparent) 0 1.5px,
+        transparent 2px
+      );
+    background-size: 48px 48px, 64px 64px;
+  }
+
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #b5965a 20%,
+      #b5965a 80%,
+      transparent
+    );
+  }
+
+  .aubergine-gradient {
+    background: linear-gradient(
+      135deg,
+      #211328 0%,
+      #32173d 45%,
+      #4a102d 100%
+    );
+  }
+
+  .lavender-veil {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, #211328 92%, transparent) 0%,
+      color-mix(in oklab, #32173d 55%, transparent) 48%,
+      transparent 100%
+    );
+  }
+
+  .glass-aubergine {
+    background: color-mix(in oklab, #211328 72%, transparent);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid color-mix(in oklab, #b9a7d8 25%, transparent);
+  }
+
+  .mask-reveal {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 100;
+    border-radius: 999px;
+    background: #211328;
+    color: #f7f3ec;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  .animate-marquee {
+    animation: marquee-scroll var(--marquee-duration, 55s) linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .grape-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: grape-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes grape-pulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
