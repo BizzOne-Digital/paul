@@ -131,6 +131,7 @@ export function SettingsEditor({ initial }: { initial: SiteSettingsFields }) {
         <h2 className="font-serif text-2xl text-aubergine">SEO & legal</h2>
         <Field label="Default SEO title" value={form.defaultSeoTitle || ""} onChange={(v) => set("defaultSeoTitle", v)} />
         <TextArea label="Default SEO description" value={form.defaultSeoDescription || ""} onChange={(v) => set("defaultSeoDescription", v)} />
+        <TextArea label="Default SEO keywords (comma-separated)" value={form.defaultSeoKeywords || ""} onChange={(v) => set("defaultSeoKeywords", v)} />
         <TextArea label="Legal disclaimer" value={form.legalDisclaimer || ""} onChange={(v) => set("legalDisclaimer", v)} />
         <Field label="Copyright text" value={form.copyrightText || ""} onChange={(v) => set("copyrightText", v)} />
       </section>

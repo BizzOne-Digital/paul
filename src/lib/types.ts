@@ -18,6 +18,7 @@ export type ImageRef = {
 export type SEOFields = {
   title?: string;
   description?: string;
+  keywords?: string;
   ogImage?: string;
   canonicalPath?: string;
 };
@@ -162,6 +163,7 @@ export type SiteSettingsData = {
   complimentaryConsultationText?: string;
   defaultSeoTitle?: string;
   defaultSeoDescription?: string;
+  defaultSeoKeywords?: string;
   legalDisclaimer?: string;
   copyright?: string;
   copyrightText?: string;

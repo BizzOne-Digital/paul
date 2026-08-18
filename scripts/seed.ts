@@ -104,6 +104,7 @@ const SiteSettingsSchema = new mongoose.Schema(
     complimentaryConsultationText: String,
     defaultSeoTitle: String,
     defaultSeoDescription: String,
+    defaultSeoKeywords: String,
     legalDisclaimer: String,
     copyright: String,
     googleMapsUrl: String,
@@ -185,7 +186,9 @@ async function main() {
     defaultSeoTitle:
       "BC Winery Buyer Advisory | Guidance for Prospective Winery Buyers",
     defaultSeoDescription:
-      "Buyer-focused information and professional consulting support for winery, vineyard, and wine-country acquisitions across British Columbia.",
+      "Buyer-focused information and professional consulting support for winery, vineyard, and wine-country acquisitions across British Columbia. BC wineries for sale, Okanagan vineyards, and confidential buyer guidance.",
+    defaultSeoKeywords:
+      "BC wineries for sale, BC vineyards for sale, Okanagan wineries for sale, buying a winery, Kelowna wineries, Penticton wineries, Naramata wineries, Oliver wineries, Keremeos wineries",
     legalDisclaimer:
       "Information on this website is provided for general informational and consulting purposes. It is not legal, tax, accounting, financial, appraisal, inspection, licensing, or brokerage advice. Buyers should consult appropriately qualified professionals before making acquisition decisions.",
     copyright: `© ${new Date().getFullYear()} BC Winery Buyer Advisory. All rights reserved.`,
@@ -199,31 +202,33 @@ async function main() {
     slug: "home",
     status: "published",
     hero: {
-      eyebrow: "British Columbia Winery Buyer Guidance",
-      heading: "Want to Buy a BC Winery?",
+      eyebrow: "Welcome",
+      heading: "BC Winery & Vineyard Buyer Advisory",
       subheading:
-        "Explore the opportunity with greater clarity. Access buyer-focused information and professional consulting support for winery, vineyard, and wine-country acquisitions across British Columbia.",
+        "This platform is dedicated to the discerning BC winery and vineyard buyer — curated resources for investors and acquirers seeking opportunities across British Columbia, with the Okanagan Valley as the province's key wine region.",
       primaryCtaLabel: "Book a Complimentary Consultation",
       primaryCtaHref: "/contact",
-      secondaryCtaLabel: "Explore Buyer Services",
-      secondaryCtaHref: "/services",
+      secondaryCtaLabel: "Explore Buyer Resources",
+      secondaryCtaHref: "#professional-resources",
       backgroundImage: STOCK.heroVineyard,
       backgroundImageAlt:
         "Sunset over a British Columbia vineyard and winery estate — illustrative atmosphere, not a listed property",
-      floatingLabel: "British Columbia Wine Country",
+      floatingLabel: "Okanagan Valley · British Columbia",
     },
     seo: {
-      title: "Want to Buy a BC Winery? | BC Winery Buyer Advisory",
+      title: "BC Wineries & Vineyards for Sale | Buyer Advisory",
       description:
-        "Buyer-focused guidance and consulting for winery and vineyard acquisitions in British Columbia. Complimentary initial consultation.",
+        "Confidential guidance for buyers seeking BC wineries and vineyards for sale. Okanagan Valley expertise — Kelowna, Penticton, Naramata, Oliver & Keremeos.",
+      keywords:
+        "BC wineries for sale, BC vineyards for sale, Okanagan wineries for sale, buying a winery, Kelowna wineries, Penticton wineries, Naramata wineries, Oliver wineries, Keremeos wineries",
     },
     sections: [
       section(
         "introduction",
         {
-          eyebrow: "A More Informed Path to Ownership",
-          heading: "Buying a Winery Is More Than Buying Property",
-          body: "A winery acquisition can involve real estate, agricultural land, buildings, equipment, inventory, licensing considerations, brand value, operations, hospitality, and long-term business planning. This resource is designed to help prospective buyers understand the opportunity, identify important questions, and assemble the right professional support.",
+          eyebrow: "Welcome",
+          heading: "A Platform for the Discerning BC Winery Buyer",
+          body: "We have curated a collection of resources built to engage with interested parties seeking to invest in or acquire a winery or vineyard in British Columbia. This guide offers specialized guidance covering confidentiality, consultancy, real estate, legal matters, budgetary considerations, valuation, seller profiles, sales and marketing, technical advice, finance, entry and exit planning, viticulture, licensing and ALR restrictions, inventory, equipment, and winery administration.\n\nAcquiring such an asset is a complex, multi-faceted venture. Wineries in BC usually comprise a vineyard varying in size, a production facility, an operating business, and perhaps a house or multiple dwellings on site — making acquisition a complex transaction with many components, not just real estate.",
           primaryImage: STOCK.vineyardRows,
           primaryImageAlt: "Vineyard landscape with orderly rows",
           secondaryImage: STOCK.production,
@@ -242,6 +247,25 @@ async function main() {
           ],
         },
         1
+      ),
+      section(
+        "okanagan-spotlight",
+        {
+          eyebrow: "Key Wine Region",
+          heading: "The Okanagan Valley — BC's Premier Winery Area",
+          subheading:
+            "Located in south-central British Columbia, western Canada, the Okanagan Valley is the province's primary wine region — home to over 200 wineries and the focus of much buyer interest. See the map for international context.",
+          items: [
+            "Kelowna",
+            "Penticton",
+            "Naramata",
+            "Oliver",
+            "Osoyoos",
+            "Keremeos",
+            "Vernon",
+          ],
+        },
+        2
       ),
       section(
         "acquisition-categories",
@@ -289,7 +313,7 @@ async function main() {
             },
           ],
         },
-        2
+        3
       ),
       section(
         "buyer-services",
@@ -301,7 +325,125 @@ async function main() {
           ctaLabel: "View All Services",
           ctaHref: "/services",
         },
-        3
+        4
+      ),
+      section(
+        "professional-resources",
+        {
+          eyebrow: "Professional Advice & Resources",
+          heading: "Specialist Guidance for Every Stage of Acquisition",
+          subheading:
+            "Confidential support across the disciplines that matter most when evaluating a BC winery or vineyard opportunity.",
+          ctaLabel: "Start a Confidential Conversation",
+          ctaHref: "/contact",
+          cards: [
+            {
+              key: "initial",
+              title: "Initial Conversation",
+              description:
+                "For an initial conversation, complete the contact form and we will arrange a discussion of your specific needs in utmost confidentiality.",
+            },
+            {
+              key: "viticulture",
+              title: "Viticulture",
+              description:
+                "Engage a viticultural consultant who can evaluate the condition of a vineyard for your purposes, and manage vineyard operations for buyers not able or willing to take on farming aspects.",
+            },
+            {
+              key: "valuation",
+              title: "Valuation Services",
+              description:
+                "Our valuation team performs detailed business valuations including all aspects of a winery enterprise.",
+            },
+            {
+              key: "real-estate",
+              title: "Real Estate",
+              description:
+                "Our real estate associates engage with the various parties to coordinate an acquisition strategy on behalf of a buyer.",
+            },
+            {
+              key: "legal",
+              title: "Legal",
+              description:
+                "Our legal partners navigate the contractual and legal complexities of a winery or vineyard acquisition.",
+            },
+            {
+              key: "seller-profiles",
+              title: "Seller Profiles",
+              description:
+                "We maintain a confidential list of owners looking for a buyer, depending on budget and size. Most winery owners are reluctant to advertise their plans to sell — we can refer you to a trusted brokerage for further confidential information available after signing a Non-Disclosure Agreement (NDA).",
+            },
+            {
+              key: "technical",
+              title: "Technical Advice",
+              description:
+                "We assist and refer to partners when appropriate to advise on best practices, winery operations, staffing, and winemaking.",
+            },
+            {
+              key: "sales-marketing",
+              title: "Sales & Marketing",
+              description:
+                "Our resources include expertise in the marketing and distribution of wine in local and national liquor markets.",
+            },
+            {
+              key: "finance",
+              title: "Finance",
+              description:
+                "We can put you in touch with investor groups and lenders ready to engage with buyers.",
+            },
+            {
+              key: "entry-exit",
+              title: "Entry / Exit Planning",
+              description:
+                "Often overlooked, this is a vital resource for any winery owner embarking on a venture — and for existing owners looking to divest.",
+            },
+            {
+              key: "licensing",
+              title: "Licensing & ALR Restrictions",
+              description:
+                "Learn what is and is not possible with an inward acquisition. Many restrictions are imposed depending on the status of the enterprise — some will not allow developments or diversification of business and income streams on a winery site.",
+            },
+            {
+              key: "inventory",
+              title: "Inventory",
+              description:
+                "A component often left until the last moment deliberately, as inventory can change daily. Evaluation according to seller instructions can lead to inaccurate valuation of inventory quality and costly mistakes.",
+            },
+            {
+              key: "equipment",
+              title: "Equipment",
+              description:
+                "The resale value of used equipment is often set by the seller rather than objective means. Market value, insured value, accountant's value, and tax value can all differ significantly.",
+            },
+            {
+              key: "operations",
+              title: "Operating Resources & Winery Administration",
+              description:
+                "We introduce resources through our network of specialists — winemakers, viticulturists, management, and administrative staff — to assist with running a winery operation.",
+            },
+          ],
+        },
+        5
+      ),
+      section(
+        "buyer-guidelines",
+        {
+          eyebrow: "Buyer Guidelines",
+          heading: "Production Capacity & Vineyard Acreage Guidelines",
+          subheading:
+            "Most winery owners are reluctant to advertise their plans to sell. We can refer you to a trusted brokerage for confidential information available after signing an NDA. These production guidelines assume well cared-for mature vineyards with limited pre-harvest fruit dropping. Purchased grapes are excluded.",
+          ctaLabel: "Contact Us to Learn More",
+          ctaHref: "/contact",
+          cards: [
+            { title: "1,000 – 2,000 cases", description: "10 acres" },
+            { title: "2,000 – 4,000 cases", description: "20 acres" },
+            { title: "4,000 – 6,000 cases", description: "30 acres" },
+            { title: "6,000 – 8,000 cases", description: "40 acres" },
+            { title: "8,000 – 10,000 cases", description: "50 acres" },
+            { title: "20,000 cases", description: "100 acres" },
+          ],
+        },
+        6
       ),
       section(
         "acquisition-journey",
@@ -341,33 +483,37 @@ async function main() {
             },
           ],
         },
-        4
+        7
       ),
       section(
         "due-diligence",
         {
-          eyebrow: "Evaluation Themes",
-          heading: "What Buyers May Need to Evaluate",
+          eyebrow: "Vital Components",
+          heading: "Specialized Guidance Across Key Acquisition Themes",
           subheading:
-            "Every opportunity is different. Specialist legal, tax, accounting, appraisal, agricultural, environmental, licensing, and brokerage advice should be obtained from appropriately qualified professionals.",
+            "This guide seeks to offer specialized guidance covering the vital components every discerning buyer should understand before committing to a BC winery or vineyard acquisition.",
           items: [
-            "Property and land",
-            "Vineyard condition",
-            "Water and agricultural considerations",
-            "Buildings and production facilities",
-            "Equipment and infrastructure",
+            "Confidentiality",
+            "Consultancy",
+            "Real Estate",
+            "Legal",
+            "Budgetary considerations",
+            "Valuation services",
+            "Seller profiles",
+            "Sales and marketing",
+            "Technical advice",
+            "Finance",
+            "Entry / exit planning",
+            "Viticulture",
+            "Licensing and ALR restrictions",
             "Inventory",
-            "Business operations",
-            "Brand and market position",
-            "Hospitality operations",
-            "Regulatory and licensing considerations",
-            "Financial information",
-            "Transition planning",
+            "Equipment",
+            "Operating resources and winery administration",
           ],
           primaryImage: STOCK.documents,
           primaryImageAlt: "Professional document review at a desk",
         },
-        5
+        8
       ),
       section(
         "regions",
@@ -375,12 +521,12 @@ async function main() {
           eyebrow: "British Columbia",
           heading: "Regions Buyers May Explore",
           subheading:
-            "British Columbia’s wine country includes established and emerging areas. Availability of advisory support for a specific opportunity depends on the engagement and circumstances.",
+            "The Okanagan Valley is the key winery area in the province. British Columbia's wine country also includes established and emerging areas beyond the Okanagan.",
           cards: [
             {
               title: "Okanagan Valley",
               description:
-                "A widely recognised wine region with diverse vineyard settings and estate character.",
+                "Canada's unexpected Mediterranean — over 200 wineries, stunning lakes, and a semi-arid climate from Vernon to Osoyoos. Kelowna, Penticton, Naramata, Oliver, and Keremeos are among its renowned communities.",
               image: STOCK.duskVineyard,
               imageAlt: "Okanagan-style vineyard landscape at dusk",
             },
@@ -421,7 +567,7 @@ async function main() {
             },
           ],
         },
-        6
+        9
       ),
       section(
         "consultation-cta",
@@ -434,7 +580,7 @@ async function main() {
           backgroundImageAlt:
             "Winery estate surrounded by vines — illustrative imagery",
         },
-        7
+        10
       ),
       section(
         "insights-preview",
@@ -444,7 +590,7 @@ async function main() {
           ctaLabel: "Explore All Insights",
           ctaHref: "/blog",
         },
-        8
+        11
       ),
       section(
         "faq-preview",
@@ -454,7 +600,7 @@ async function main() {
           ctaLabel: "View All FAQs",
           ctaHref: "/faq",
         },
-        9
+        12
       ),
       section(
         "final-cta",
@@ -465,7 +611,7 @@ async function main() {
           secondaryCtaLabel: "Contact Us",
           secondaryCtaHref: "/contact",
         },
-        10
+        13
       ),
     ],
   });
@@ -617,9 +763,17 @@ async function main() {
         "introduction",
         {
           heading: "Clarity Before Commitment",
-          body: "These questions address common early concerns. Specific advice for your situation should come from qualified professionals.",
+          body: "These questions address common early concerns. Explore the map and Okanagan guide below for regional context. Specific advice for your situation should come from qualified professionals.",
         },
         1
+      ),
+      section(
+        "location",
+        {
+          heading: "Where Are We?",
+          body: "BC Winery Buyer Advisory serves discerning buyers exploring winery and vineyard acquisitions across British Columbia. The Okanagan Valley — in south-central BC, western Canada — is the province's primary wine region.",
+        },
+        2
       ),
       section(
         "buyer-readiness",
@@ -904,6 +1058,21 @@ async function main() {
 
   const faqs = [
     {
+      q: "Where are we located?",
+      a: "We serve buyers exploring winery and vineyard acquisitions across British Columbia, Canada. The Okanagan Valley — in south-central BC, western Canada — is the province's key wine region. See the map on our FAQ page for geographic context, including Kelowna, Penticton, Naramata, Oliver, Osoyoos, and Keremeos.",
+      c: "Getting Started",
+    },
+    {
+      q: "What is the Okanagan Valley?",
+      a: "The Okanagan Valley is Canada's unexpected Mediterranean — a desert oasis in south-central British Columbia. Famous as the Napa Valley of the North, it features stunning lakes, over 200 wineries, and a semi-arid climate with summer temperatures exceeding 30°C. The valley stretches roughly 250 km from Vernon in the greener north to Osoyoos near the US border in the south. See our full Okanagan guide on the FAQ page for more detail.",
+      c: "Getting Started",
+    },
+    {
+      q: "What are the buyer guidelines for production capacity?",
+      a: "Guidelines for mature vineyards (owned or leased, purchased grapes excluded): 1,000–2,000 cases / 10 acres; 2,000–4,000 cases / 20 acres; 4,000–6,000 cases / 30 acres; 6,000–8,000 cases / 40 acres; 8,000–10,000 cases / 50 acres; 20,000 cases / 100 acres. These assume well cared-for mature vineyards with limited pre-harvest fruit dropping. Recent yield records and inspection by a qualified viticulturist are essential. Contact us to learn more about expected yields and production techniques.",
+      c: "Process & Timeline",
+    },
+    {
       q: "Is the initial consultation complimentary?",
       a: "Yes. The initial consultation call is complimentary and provides an opportunity to discuss your acquisition goals, preferred type of winery or vineyard, and expected timeframe.",
       c: "Getting Started",
@@ -925,7 +1094,7 @@ async function main() {
     },
     {
       q: "Can you help me find a winery for sale?",
-      a: "The service can help buyers define their criteria and navigate available information. Exclusive, confidential, or off-market listing access is not promised unless this capability is later confirmed by the business owner.",
+      a: "Most winery owners are reluctant to advertise their plans to sell. We can refer you to a trusted brokerage for further confidential information available after signing a Non-Disclosure Agreement (NDA). We maintain a confidential list of owners looking for a buyer depending on budget and size. We help buyers define criteria and navigate available information — exclusive or off-market access is not promised unless later confirmed.",
       c: "Search & Opportunities",
     },
     {

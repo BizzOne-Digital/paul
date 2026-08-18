@@ -21,14 +21,14 @@ export function ServicesHorizontal({ services }: ServicesHorizontalProps) {
   const reduced = usePrefersReducedMotion();
 
   useLayoutEffect(() => {
-    if (reduced || !sectionRef.current || !trackRef.current) return;
+    const section = sectionRef.current;
+    if (reduced || !section || !trackRef.current) return;
     if (services.length < 2) return;
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px)", () => {
-        const section = sectionRef.current!;
         const track = trackRef.current!;
 
         const getScrollDistance = () =>
@@ -86,9 +86,8 @@ export function ServicesHorizontal({ services }: ServicesHorizontalProps) {
 
     return () => {
       ctx.revert();
-      // Ensure pin spacers / body locks never survive route changes
       ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === sectionRef.current) st.kill(true);
+        if (st.trigger === section) st.kill(true);
       });
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";

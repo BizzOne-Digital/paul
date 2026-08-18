@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { FaqGallery } from "@/components/faq/FaqGallery";
+import { FaqLocationSection } from "@/components/faq/FaqLocationSection";
+import { OkanaganGuide } from "@/components/faq/OkanaganGuide";
 import { getPageBySlug, getPublishedFaqs, getSection } from "@/lib/data";
 import { absoluteUrl } from "@/lib/utils";
 import { imageAlt, imageSrc, STOCK } from "@/lib/images";
@@ -68,6 +70,16 @@ export default async function FaqPage() {
         </section>
       ) : null}
 
+      <FaqLocationSection
+        heading={
+          (getSection(page, "location") as { heading?: string } | undefined)
+            ?.heading
+        }
+        body={
+          (getSection(page, "location") as { body?: string } | undefined)?.body
+        }
+      />
+
       <section className="pb-20 md:pb-28">
         <div className="mx-auto max-w-4xl px-5 sm:px-6 md:px-10">
           <FaqClient
@@ -80,6 +92,8 @@ export default async function FaqPage() {
           />
         </div>
       </section>
+
+      <OkanaganGuide />
 
       {readiness ? (
         <section className="bg-plum/5 py-20 md:py-28">

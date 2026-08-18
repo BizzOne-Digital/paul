@@ -86,9 +86,16 @@ export function HomeIntroduction({ section }: HomeIntroductionProps) {
                 section.heading ||
                 "Buying a Winery Is More Than Buying Property"
               }
-              description={section.body}
+              description={undefined}
               className="[&_p.font-label]:!text-champagne"
             />
+            {section.body ? (
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-charcoal/75 md:text-lg">
+                {section.body.split(/\n\n+/).map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                ))}
+              </div>
+            ) : null}
           </Reveal>
         </div>
 

@@ -32,6 +32,7 @@ const SiteSettingsSchema = new Schema(
     complimentaryConsultationText: { type: String, default: "" },
     defaultSeoTitle: { type: String, default: "" },
     defaultSeoDescription: { type: String, default: "" },
+    defaultSeoKeywords: { type: String, default: "" },
     legalDisclaimer: { type: String, default: "" },
     copyright: { type: String, default: "" },
     copyrightText: { type: String, default: "" },

@@ -37,7 +37,12 @@ export type HeaderProps = {
   services?: ServiceNavItem[];
 };
 
-export function Header({
+export function Header(props: HeaderProps) {
+  const pathname = usePathname();
+  return <HeaderInner key={pathname} {...props} />;
+}
+
+function HeaderInner({
   websiteName,
   phone,
   phoneTel,
@@ -63,11 +68,6 @@ export function Header({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-    setServicesOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!mobileOpen) return;

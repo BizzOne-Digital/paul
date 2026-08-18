@@ -17,7 +17,7 @@ export async function POST(_request: Request, { params }: Params) {
     }
 
     const sourceSlug = String(source.slug || "post");
-    let base = `${sourceSlug}-copy`;
+    const base = `${sourceSlug}-copy`;
     let slug = slugify(base);
     let n = 2;
     while (await BlogPost.exists({ slug })) {

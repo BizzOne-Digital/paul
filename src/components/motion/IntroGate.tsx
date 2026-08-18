@@ -13,16 +13,20 @@ import { usePathname } from "next/navigation";
 const STORAGE_KEY = "bcwba-intro-seen";
 
 type IntroGateContextValue = {
-  /** True once we know whether to show intro / site (client hydrated). */
   ready: boolean;
-  /** Intro overlay should be visible. */
   showIntro: boolean;
-  /** Site chrome/content may be revealed. */
   revealSite: boolean;
   completeIntro: () => void;
 };
 
 const IntroGateContext = createContext<IntroGateContextValue | null>(null);
+
+const ADMIN_BYPASS: IntroGateContextValue = {
+  ready: true,
+  showIntro: false,
+  revealSite: true,
+  completeIntro: () => {},
+};
 
 export function useIntroGate() {
   const ctx = useContext(IntroGateContext);
@@ -39,22 +43,12 @@ function clearIntroLock() {
   document.body.style.backgroundColor = "";
 }
 
-export function IntroGateProvider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+function PublicIntroGateProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
   const [revealSite, setRevealSite] = useState(false);
 
   useEffect(() => {
-    // Admin (and any non-public shell) must never be blocked by the intro gate
-    if (pathname?.startsWith("/admin")) {
-      setShowIntro(false);
-      setRevealSite(true);
-      clearIntroLock();
-      setReady(true);
-      return;
-    }
-
     let reduced = false;
     try {
       reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -69,6 +63,8 @@ export function IntroGateProvider({ children }: { children: React.ReactNode }) {
       seen = false;
     }
 
+  /* Client-only intro gate — reads sessionStorage on first paint */
+  /* eslint-disable react-hooks/set-state-in-effect -- intentional hydration */
     if (seen || reduced) {
       setShowIntro(false);
       setRevealSite(true);
@@ -82,7 +78,10 @@ export function IntroGateProvider({ children }: { children: React.ReactNode }) {
       document.body.style.backgroundColor = "#211328";
     }
     setReady(true);
-  }, [pathname]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+    return () => clearIntroLock();
+  }, []);
 
   const completeIntro = useCallback(() => {
     try {
@@ -92,7 +91,6 @@ export function IntroGateProvider({ children }: { children: React.ReactNode }) {
     }
     clearIntroLock();
     setShowIntro(false);
-    // Small delay so exit animation can start before content pops in
     window.setTimeout(() => setRevealSite(true), 120);
   }, []);
 
@@ -104,4 +102,18 @@ export function IntroGateProvider({ children }: { children: React.ReactNode }) {
   return (
     <IntroGateContext.Provider value={value}>{children}</IntroGateContext.Provider>
   );
+}
+
+export function IntroGateProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/admin")) {
+    return (
+      <IntroGateContext.Provider value={ADMIN_BYPASS}>
+        {children}
+      </IntroGateContext.Provider>
+    );
+  }
+
+  return <PublicIntroGateProvider>{children}</PublicIntroGateProvider>;
 }

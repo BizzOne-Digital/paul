@@ -2,13 +2,18 @@
   "name": "bc-winery-buyer-advisory",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx --env-file=.env scripts/seed.ts"
+    "seed": "tsx --env-file=.env scripts/seed.ts",
+    "check:env": "tsx --env-file=.env scripts/check-env.ts",
+    "postinstall": "node scripts/ensure-dirs.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

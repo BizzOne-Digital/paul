@@ -231,6 +231,7 @@ export const settingsSchema = z.object({
   complimentaryConsultationText: z.string().optional().or(z.literal("")),
   defaultSeoTitle: z.string().optional().or(z.literal("")),
   defaultSeoDescription: z.string().optional().or(z.literal("")),
+  defaultSeoKeywords: z.string().optional().or(z.literal("")),
   legalDisclaimer: z.string().optional().or(z.literal("")),
   copyright: z.string().optional().or(z.literal("")),
   copyrightText: z.string().optional().or(z.literal("")),

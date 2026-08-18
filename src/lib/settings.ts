@@ -24,6 +24,7 @@ export type SiteSettings = {
   complimentaryConsultationText: string;
   defaultSeoTitle: string;
   defaultSeoDescription: string;
+  defaultSeoKeywords: string;
   legalDisclaimer: string;
   copyright: string;
   googleMapsUrl: string;
@@ -56,6 +57,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     "BC Winery Buyer Advisory | Guidance for Prospective Winery Buyers",
   defaultSeoDescription:
     "Buyer-focused information and professional consulting support for winery, vineyard, and wine-country acquisitions across British Columbia.",
+  defaultSeoKeywords:
+    "BC wineries for sale, BC vineyards for sale, Okanagan wineries for sale, buying a winery, Kelowna wineries, Penticton wineries, Naramata wineries, Oliver wineries, Keremeos wineries",
   legalDisclaimer:
     "Information on this website is provided for general informational and consulting purposes. It is not legal, tax, accounting, financial, appraisal, inspection, licensing, or brokerage advice. Buyers should consult appropriately qualified professionals before making acquisition decisions.",
   copyright: `© ${new Date().getFullYear()} BC Winery Buyer Advisory. All rights reserved.`,
@@ -101,6 +104,8 @@ function mapSettings(doc: SiteSettingsData | null | undefined): SiteSettings {
     defaultSeoTitle: doc.defaultSeoTitle || DEFAULT_SETTINGS.defaultSeoTitle,
     defaultSeoDescription:
       doc.defaultSeoDescription || DEFAULT_SETTINGS.defaultSeoDescription,
+    defaultSeoKeywords:
+      doc.defaultSeoKeywords || DEFAULT_SETTINGS.defaultSeoKeywords,
     legalDisclaimer: doc.legalDisclaimer || DEFAULT_SETTINGS.legalDisclaimer,
     copyright: copyrightRaw.replace("{year}", String(new Date().getFullYear())),
     googleMapsUrl: doc.googleMapsUrl || DEFAULT_SETTINGS.googleMapsUrl,

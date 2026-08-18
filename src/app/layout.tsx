@@ -24,6 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     settings.defaultSeoDescription || settings.companyDescription;
   const favicon = settings.favicon || "/brand/favicon.svg";
+  const keywords = settings.defaultSeoKeywords
+    ? settings.defaultSeoKeywords.split(",").map((k) => k.trim()).filter(Boolean)
+    : undefined;
 
   return {
     title: {
@@ -31,6 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s · ${settings.websiteName}`,
     },
     description,
+    keywords,
     icons: {
       icon: favicon,
       shortcut: favicon,

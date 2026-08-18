@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomeIntroduction } from "@/components/home/HomeIntroduction";
+import { HomeOkanaganSpotlight } from "@/components/home/HomeOkanaganSpotlight";
 import { HomeAcquisitionCategories } from "@/components/home/HomeAcquisitionCategories";
 import { HomeBuyerServices } from "@/components/home/HomeBuyerServices";
+import { HomeProfessionalResources } from "@/components/home/HomeProfessionalResources";
+import { HomeBuyerGuidelines } from "@/components/home/HomeBuyerGuidelines";
 import { HomeAcquisitionJourney } from "@/components/home/HomeAcquisitionJourney";
 import { HomeDueDiligence } from "@/components/home/HomeDueDiligence";
 import { HomeRegions } from "@/components/home/HomeRegions";
@@ -34,11 +37,16 @@ export async function generateMetadata(): Promise<Metadata> {
     "Want to Buy a BC Winery?";
   const description =
     page?.seo?.description || settings.defaultSeoDescription;
+  const keywords =
+    page?.seo?.keywords || settings.defaultSeoKeywords || undefined;
   const ogImage = mediaUrl(page?.hero?.backgroundImage);
 
   return {
     title,
     description,
+    keywords: keywords
+      ? keywords.split(",").map((k) => k.trim()).filter(Boolean)
+      : undefined,
     alternates: { canonical: absoluteUrl("/") },
     openGraph: {
       title,
@@ -106,6 +114,7 @@ export default async function HomePage() {
       />
       <HomeHero hero={hero} />
       <HomeIntroduction section={getSection(page, "introduction")} />
+      <HomeOkanaganSpotlight section={getSection(page, "okanagan-spotlight")} />
       <HomeAcquisitionCategories
         section={getSection(page, "acquisition-categories")}
       />
@@ -113,6 +122,10 @@ export default async function HomePage() {
         section={getSection(page, "buyer-services")}
         services={services}
       />
+      <HomeProfessionalResources
+        section={getSection(page, "professional-resources")}
+      />
+      <HomeBuyerGuidelines section={getSection(page, "buyer-guidelines")} />
       <HomeAcquisitionJourney
         section={getSection(page, "acquisition-journey")}
       />

@@ -28,11 +28,14 @@ ADMIN_EMAIL=admin@bcwinerybuyer.com
 ADMIN_PASSWORD=Admin123!Secure
 ```
 
-Optional:
+Optional (recommended for production):
 
 ```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NODE_ENV=production
 ```
+
+Generate a strong `AUTH_SECRET` (32+ characters). Never commit `.env` to git.
 
 ## Setup
 
@@ -48,7 +51,7 @@ npm run dev
 Default seeded admin (from `.env`):
 
 - Email: `admin@bcwinerybuyer.com`
-- Password: `Admin123!Secure`
+- Password: value of `ADMIN_PASSWORD` in `.env` (default `Admin123!Secure` — change before production)
 
 ### MongoDB Compass
 
@@ -64,12 +67,59 @@ npm run seed
 
 Creates:
 
-- Site settings (editable website name, contact details, CTAs, disclaimer)
+- Site settings (editable website name, contact details, CTAs, disclaimer, SEO keywords)
 - Admin user from `ADMIN_EMAIL` / `ADMIN_PASSWORD`
 - Home, Services, Contact, FAQ, Blog pages with sections
 - Six buyer services with detail pages
-- Eight FAQs
+- Eleven FAQs (including Okanagan map, buyer guidelines, location)
 - Six Buyer Insights articles
+
+## Production deployment
+
+Recommended: **VPS or dedicated server** with Node.js 20+, MongoDB, and **persistent disk** for `/public/uploads` (admin image uploads).
+
+### Pre-flight checklist
+
+```bash
+npm run check:env    # validate MONGODB_URI, AUTH_SECRET, etc.
+npm run build        # production build
+npm run lint
+npm run typecheck
+```
+
+### Deploy steps (VPS / PM2 example)
+
+1. Clone repo and install dependencies:
+   ```bash
+   npm ci
+   ```
+2. Copy `.env.example` → `.env` and set production values:
+   - `MONGODB_URI` — MongoDB Atlas or self-hosted connection string
+   - `AUTH_SECRET` — long random string (32+ chars)
+   - `NEXT_PUBLIC_SITE_URL` — `https://your-domain.com`
+   - `ADMIN_EMAIL` / `ADMIN_PASSWORD` — strong credentials
+3. Seed the database (first deploy only, or when resetting content):
+   ```bash
+   npm run seed
+   ```
+4. Build and start:
+   ```bash
+   npm run build
+   NODE_ENV=production npm run start
+   ```
+5. Put Nginx/Caddy in front with HTTPS, proxying to port `3000`.
+
+Upload directories (`public/uploads/*`) are created automatically on `npm install`.
+
+### Serverless (Vercel / Netlify)
+
+The app builds and runs, but **local disk uploads will not persist** on serverless hosts. Use a VPS, or replace the upload adapter with object storage (S3, R2, etc.) before relying on admin image uploads in production.
+
+### After deploy
+
+1. Log in at `/admin/login` and change the default admin password if you used the seed default.
+2. Review **Admin → Settings** (website name, contact, SEO keywords).
+3. Submit a test contact form and confirm the lead appears in **Admin → Leads**.
 
 ## Admin CMS
 
@@ -121,6 +171,7 @@ SMTP inquiry notifications are not configured by default. Contact submissions ar
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript check |
 | `npm run seed` | Seed MongoDB |
+| `npm run check:env` | Validate environment before production start |
 
 ## Public routes
 
