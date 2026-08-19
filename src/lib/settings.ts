@@ -86,7 +86,7 @@ function mapSettings(doc: SiteSettingsData | null | undefined): SiteSettings {
     favicon: doc.favicon || doc.faviconUrl || DEFAULT_SETTINGS.favicon,
     companyDescription:
       doc.companyDescription || DEFAULT_SETTINGS.companyDescription,
-    email: doc.email || DEFAULT_SETTINGS.email,
+    email: process.env.SITE_CONTACT_EMAIL?.trim() || doc.email || DEFAULT_SETTINGS.email,
     phone: doc.phone || DEFAULT_SETTINGS.phone,
     phoneTel,
     socialHandle: doc.socialHandle || DEFAULT_SETTINGS.socialHandle,
@@ -119,7 +119,13 @@ export const getSettings = cache(async (): Promise<SiteSettings> => {
     const { SiteSettings: SiteSettingsModel } = await import(
       "@/models/SiteSettings"
     );
-    const doc = await SiteSettingsModel.findOne().lean<SiteSettingsData>();
+    const doc = await SiteSettingsModel.findOne({
+      singletonKey: "default",
+    }).lean<SiteSettingsData>();
+    if (!doc) {
+      const fallback = await SiteSettingsModel.findOne().lean<SiteSettingsData>();
+      return mapSettings(fallback);
+    }
     return mapSettings(doc);
   } catch {
     return DEFAULT_SETTINGS;
