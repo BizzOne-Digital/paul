@@ -39,7 +39,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   favicon: "/brand/favicon.svg",
   companyDescription:
     "An information resource and professional consulting service for buyers considering the acquisition of wineries, vineyards, winery estates, and related wine-industry businesses in British Columbia.",
-  email: "paulmgraydon@gmail.com",
+  email: "bcwinerisforsale@gmail.com",
   phone: "+1 (250) 809-2342",
   phoneTel: "+12508092342",
   socialHandle: "faithwilson",
