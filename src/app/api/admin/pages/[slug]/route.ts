@@ -28,8 +28,14 @@ export async function PUT(request: Request, { params }: Params) {
     }
 
     if (body.name !== undefined) page.name = body.name;
-    if (body.hero !== undefined) page.hero = body.hero as typeof page.hero;
-    if (body.seo !== undefined) page.seo = body.seo as typeof page.seo;
+    if (body.hero !== undefined) {
+      page.hero = body.hero as typeof page.hero;
+      page.markModified("hero");
+    }
+    if (body.seo !== undefined) {
+      page.seo = body.seo as typeof page.seo;
+      page.markModified("seo");
+    }
     if (body.status !== undefined) page.status = body.status;
 
     if (body.section) {
@@ -47,12 +53,14 @@ export async function PUT(request: Request, { params }: Params) {
       page.sections = sections.sort(
         (a, b) => (a.order ?? 0) - (b.order ?? 0),
       ) as typeof page.sections;
+      page.markModified("sections");
     }
 
     if (body.sections) {
       page.sections = [...body.sections].sort(
         (a, b) => (a.order ?? 0) - (b.order ?? 0),
       ) as typeof page.sections;
+      page.markModified("sections");
     }
 
     await page.save();

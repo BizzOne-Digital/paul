@@ -81,11 +81,8 @@ export function HomeIntroduction({ section }: HomeIntroductionProps) {
         <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
           <Reveal>
             <SectionHeading
-              eyebrow={section.eyebrow || "A More Informed Path to Ownership"}
-              title={
-                section.heading ||
-                "Buying a Winery Is More Than Buying Property"
-              }
+              eyebrow={section.eyebrow}
+              title={section.heading || ""}
               description={undefined}
               className="[&_p.font-label]:!text-champagne"
             />

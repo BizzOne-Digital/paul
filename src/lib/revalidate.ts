@@ -38,7 +38,10 @@ export function revalidatePage(slug: string) {
     faq: "/faq",
     blog: "/blog",
   };
-  revalidatePath(map[slug] || `/${slug}`);
+  const path = map[slug] || `/${slug}`;
+  revalidatePath(path, "page");
+  revalidatePath(path, "layout");
+  revalidatePath("/", "layout");
   if (slug === "home") revalidatePath("/");
 }
 

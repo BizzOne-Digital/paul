@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/components/admin/ToastProvider";
 import { ImageUploader } from "@/components/admin/ImageUploader";
 import { PageSectionEditor } from "@/components/admin/PageSectionEditor";
@@ -17,11 +18,32 @@ import type { HeroContent, PageSection, SEO } from "@/lib/types";
 
 type PageData = {
   name: string;
-  hero: HeroContent;
+  hero: HeroContent & {
+    primaryCtaLabel?: string;
+    primaryCtaHref?: string;
+    secondaryCtaLabel?: string;
+    secondaryCtaHref?: string;
+    backgroundImage?: unknown;
+    backgroundImageAlt?: string;
+  };
   sections: PageSection[];
   seo: SEO;
   status: "draft" | "published";
 };
+
+function applySavedPage(page: Record<string, unknown>): PageData {
+  const sections = ((page.sections as PageSection[] | undefined) || []).sort(
+    (a, b) => (a.order ?? 0) - (b.order ?? 0),
+  );
+
+  return {
+    name: String(page.name || ""),
+    hero: (page.hero as PageData["hero"]) || {},
+    sections,
+    seo: (page.seo as SEO) || {},
+    status: (page.status as PageData["status"]) || "published",
+  };
+}
 
 function formatApiError(json: { error?: string; issues?: Array<{ path?: Array<string | number>; message?: string }> }) {
   if (!json.issues?.length) return json.error || "Save failed";
@@ -44,6 +66,7 @@ export function PageEditor({
   initial: PageData;
   previewPath: string;
 }) {
+  const router = useRouter();
   const { toast } = useToast();
   const [data, setData] = useState(initial);
   const [activeKey, setActiveKey] = useState(initial.sections[0]?.key || "hero");
@@ -64,6 +87,8 @@ export function PageEditor({
       });
       const json = await res.json();
       if (!res.ok) throw new Error(formatApiError(json));
+      if (json.page) setData(applySavedPage(json.page));
+      router.refresh();
       toast({ title: "Page saved", tone: "success" });
     } catch (error) {
       toast({
@@ -87,6 +112,8 @@ export function PageEditor({
       });
       const json = await res.json();
       if (!res.ok) throw new Error(formatApiError(json));
+      if (json.page) setData(applySavedPage(json.page));
+      router.refresh();
       toast({ title: `Section “${activeSection.key}” saved`, tone: "success" });
     } catch (error) {
       toast({
@@ -164,6 +191,13 @@ export function PageEditor({
         </div>
       </div>
 
+      {data.status === "draft" ? (
+        <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+          This page is a <strong>draft</strong>. The public site only shows published
+          pages — set status to Published and save for visitors to see your edits.
+        </p>
+      ) : null}
+
       <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
         <aside className={`${panelClass} h-fit space-y-2`}>
           <button
@@ -236,12 +270,17 @@ export function PageEditor({
               <div className="grid gap-4 md:grid-cols-2">
                 <Field
                   label="Primary CTA label"
-                  value={data.hero.primaryCta?.label || ""}
+                  value={
+                    data.hero.primaryCtaLabel ||
+                    data.hero.primaryCta?.label ||
+                    ""
+                  }
                   onChange={(v) =>
                     setData((p) => ({
                       ...p,
                       hero: {
                         ...p.hero,
+                        primaryCtaLabel: v,
                         primaryCta: { ...p.hero.primaryCta, label: v },
                       },
                     }))
@@ -249,31 +288,81 @@ export function PageEditor({
                 />
                 <Field
                   label="Primary CTA link"
-                  value={data.hero.primaryCta?.href || ""}
+                  value={
+                    data.hero.primaryCtaHref || data.hero.primaryCta?.href || ""
+                  }
                   onChange={(v) =>
                     setData((p) => ({
                       ...p,
                       hero: {
                         ...p.hero,
+                        primaryCtaHref: v,
                         primaryCta: { ...p.hero.primaryCta, href: v },
+                      },
+                    }))
+                  }
+                />
+                <Field
+                  label="Secondary CTA label"
+                  value={
+                    data.hero.secondaryCtaLabel ||
+                    data.hero.secondaryCta?.label ||
+                    ""
+                  }
+                  onChange={(v) =>
+                    setData((p) => ({
+                      ...p,
+                      hero: {
+                        ...p.hero,
+                        secondaryCtaLabel: v,
+                        secondaryCta: { ...p.hero.secondaryCta, label: v },
+                      },
+                    }))
+                  }
+                />
+                <Field
+                  label="Secondary CTA link"
+                  value={
+                    data.hero.secondaryCtaHref ||
+                    data.hero.secondaryCta?.href ||
+                    ""
+                  }
+                  onChange={(v) =>
+                    setData((p) => ({
+                      ...p,
+                      hero: {
+                        ...p.hero,
+                        secondaryCtaHref: v,
+                        secondaryCta: { ...p.hero.secondaryCta, href: v },
                       },
                     }))
                   }
                 />
               </div>
               <ImageUploader
-                label="Hero image"
+                label="Hero background image"
                 category="pages"
-                value={data.hero.image?.url}
-                alt={data.hero.image?.alt}
+                value={
+                  typeof data.hero.backgroundImage === "string"
+                    ? data.hero.backgroundImage
+                    : data.hero.backgroundImage &&
+                        typeof data.hero.backgroundImage === "object" &&
+                        "url" in data.hero.backgroundImage
+                      ? String(
+                          (data.hero.backgroundImage as { url?: string }).url ||
+                            "",
+                        )
+                      : data.hero.image?.url
+                }
+                alt={data.hero.backgroundImageAlt || data.hero.image?.alt}
                 onChange={(url) =>
                   setData((p) => ({
                     ...p,
                     hero: {
                       ...p.hero,
-                      image: url
-                        ? { url, alt: p.hero.image?.alt || "" }
-                        : undefined,
+                      backgroundImage: url || undefined,
+                      backgroundImageAlt:
+                        p.hero.backgroundImageAlt || p.hero.image?.alt || "",
                     },
                   }))
                 }

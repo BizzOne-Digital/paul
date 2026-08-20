@@ -20,10 +20,12 @@ import {
   getPublishedServices,
   getSection,
 } from "@/lib/data";
+import { buildHomeHero } from "@/lib/cms-page";
 import { getSettings } from "@/lib/settings";
 import { absoluteUrl } from "@/lib/utils";
 import { mediaUrl } from "@/lib/media";
-import { STOCK } from "@/lib/images";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [page, settings] = await Promise.all([
@@ -66,33 +68,7 @@ export default async function HomePage() {
     getSettings(),
   ]);
 
-  const cmsHero = page?.hero || {};
-  const cmsBg = cmsHero.backgroundImage
-    ? String(
-        typeof cmsHero.backgroundImage === "string"
-          ? cmsHero.backgroundImage
-          : (cmsHero.backgroundImage as { url?: string }).url || "",
-      )
-    : "";
-
-  const hero = {
-    eyebrow: "British Columbia Winery Buyer Guidance",
-    heading: "Want to Buy a BC Winery?",
-    subheading:
-      "Independent information and professional consulting support for buyers exploring wineries, vineyards, and wine-country opportunities across British Columbia.",
-    primaryCtaLabel: settings.headerCtaLabel || "Book a Complimentary Call",
-    primaryCtaHref: settings.headerCtaHref || "/contact",
-    secondaryCtaLabel: "Explore Buyer Services",
-    secondaryCtaHref: "/services",
-    backgroundImageAlt:
-      "Sunset over a British Columbia vineyard and winery estate — illustrative atmosphere, not a listed property",
-    floatingLabel: "British Columbia Wine Country",
-    ...cmsHero,
-    // Prefer uploaded CMS art; otherwise use the cinematic local hero photo
-    backgroundImage: cmsBg.startsWith("/uploads/")
-      ? cmsBg
-      : STOCK.heroVineyard,
-  };
+  const hero = buildHomeHero(page?.hero, settings);
 
   const jsonLd = {
     "@context": "https://schema.org",

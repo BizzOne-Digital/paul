@@ -202,18 +202,18 @@ async function main() {
     slug: "home",
     status: "published",
     hero: {
-      eyebrow: "Welcome",
-      heading: "BC Winery & Vineyard Buyer Advisory",
+      eyebrow: "British Columbia Winery Buyer Guidance",
+      heading: "Want to Buy a BC Winery?",
       subheading:
-        "This platform is dedicated to the discerning BC winery and vineyard buyer — curated resources for investors and acquirers seeking opportunities across British Columbia, with the Okanagan Valley as the province's key wine region.",
-      primaryCtaLabel: "Book a Complimentary Consultation",
+        "Independent information and professional consulting support for buyers exploring wineries, vineyards, and wine-country opportunities across British Columbia.",
+      primaryCtaLabel: "Book a Complimentary Call",
       primaryCtaHref: "/contact",
-      secondaryCtaLabel: "Explore Buyer Resources",
-      secondaryCtaHref: "#professional-resources",
+      secondaryCtaLabel: "Explore Buyer Services",
+      secondaryCtaHref: "/services",
       backgroundImage: STOCK.heroVineyard,
       backgroundImageAlt:
         "Sunset over a British Columbia vineyard and winery estate — illustrative atmosphere, not a listed property",
-      floatingLabel: "Okanagan Valley · British Columbia",
+      floatingLabel: "British Columbia Wine Country",
     },
     seo: {
       title: "BC Wineries & Vineyards for Sale | Buyer Advisory",
@@ -226,8 +226,8 @@ async function main() {
       section(
         "introduction",
         {
-          eyebrow: "Welcome",
-          heading: "A Platform for the Discerning BC Winery Buyer",
+          eyebrow: "A More Informed Path to Ownership",
+          heading: "Buying a Winery Is More Than Buying Property",
           body: "We have curated a collection of resources built to engage with interested parties seeking to invest in or acquire a winery or vineyard in British Columbia. This guide offers specialized guidance covering confidentiality, consultancy, real estate, legal matters, budgetary considerations, valuation, seller profiles, sales and marketing, technical advice, finance, entry and exit planning, viticulture, licensing and ALR restrictions, inventory, equipment, and winery administration.\n\nAcquiring such an asset is a complex, multi-faceted venture. Wineries in BC usually comprise a vineyard varying in size, a production facility, an operating business, and perhaps a house or multiple dwellings on site — making acquisition a complex transaction with many components, not just real estate.",
           primaryImage: STOCK.vineyardRows,
           primaryImageAlt: "Vineyard landscape with orderly rows",
