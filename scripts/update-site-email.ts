@@ -8,7 +8,7 @@ const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/bc_winery_buyer";
 
 const EMAIL =
-  process.env.SITE_CONTACT_EMAIL?.trim() || "bcwinerisforsale@gmail.com";
+  process.env.SITE_CONTACT_EMAIL?.trim() || "bcwineriesforsale@gmail.com";
 
 const SiteSettingsSchema = new mongoose.Schema(
   {

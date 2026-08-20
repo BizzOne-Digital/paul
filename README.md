@@ -97,7 +97,7 @@ npm run typecheck
    - `MONGODB_URI` — MongoDB Atlas or self-hosted connection string
    - `AUTH_SECRET` — long random string (32+ chars)
    - `NEXT_PUBLIC_SITE_URL` — `https://your-domain.com`
-   - `SITE_CONTACT_EMAIL` — `bcwinerisforsale@gmail.com` (public footer/contact email)
+   - `SITE_CONTACT_EMAIL` — `bcwineriesforsale@gmail.com` (public footer/contact email)
    - `ADMIN_EMAIL` / `ADMIN_PASSWORD` — strong credentials
 3. Seed the database (first deploy only, or when resetting content):
    ```bash

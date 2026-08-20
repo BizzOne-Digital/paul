@@ -16,7 +16,7 @@ const SiteSettingsSchema = new Schema(
     logoLightUrl: { type: String, default: "/brand/logo-symbol-light.svg" },
     faviconUrl: { type: String, default: "/brand/favicon.svg" },
     companyDescription: { type: String, default: "" },
-    email: { type: String, default: "bcwinerisforsale@gmail.com" },
+    email: { type: String, default: "bcwineriesforsale@gmail.com" },
     phone: { type: String, default: "+1 (250) 809-2342" },
     phoneTel: { type: String, default: "+12508092342" },
     phoneHref: { type: String, default: "tel:+12508092342" },
