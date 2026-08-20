@@ -23,6 +23,18 @@ type PageData = {
   status: "draft" | "published";
 };
 
+function formatApiError(json: { error?: string; issues?: Array<{ path?: Array<string | number>; message?: string }> }) {
+  if (!json.issues?.length) return json.error || "Save failed";
+  const detail = json.issues
+    .slice(0, 3)
+    .map((issue) => {
+      const path = issue.path?.length ? issue.path.join(".") : "field";
+      return `${path}: ${issue.message || "invalid"}`;
+    })
+    .join("; ");
+  return `${json.error || "Save failed"} — ${detail}`;
+}
+
 export function PageEditor({
   slug,
   initial,
@@ -51,7 +63,7 @@ export function PageEditor({
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Save failed");
+      if (!res.ok) throw new Error(formatApiError(json));
       toast({ title: "Page saved", tone: "success" });
     } catch (error) {
       toast({
@@ -74,7 +86,7 @@ export function PageEditor({
         body: JSON.stringify({ section: activeSection }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Save failed");
+      if (!res.ok) throw new Error(formatApiError(json));
       toast({ title: `Section “${activeSection.key}” saved`, tone: "success" });
     } catch (error) {
       toast({

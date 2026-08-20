@@ -12,16 +12,99 @@ const imageRefSchema = z.object({
   alt: z.string().optional(),
 });
 
+/** CMS stores images as upload paths (string) or { url, alt } objects. */
+const imageFieldSchema = z
+  .union([z.string(), imageRefSchema])
+  .optional()
+  .nullable();
+
 const ctaSchema = z.object({
   label: z.string().optional(),
   href: z.string().optional(),
 });
 
-const seoSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
-  ogImage: z.string().optional(),
-});
+const seoSchema = z
+  .object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    keywords: z.string().optional(),
+    ogImage: z.string().optional(),
+    canonicalPath: z.string().optional(),
+  })
+  .passthrough();
+
+const heroSchema = z
+  .object({
+    eyebrow: z.string().optional(),
+    heading: z.string().optional(),
+    subheading: z.string().optional(),
+    body: z.string().optional(),
+    primaryCta: ctaSchema.optional(),
+    secondaryCta: ctaSchema.optional(),
+    primaryCtaLabel: z.string().optional(),
+    primaryCtaHref: z.string().optional(),
+    secondaryCtaLabel: z.string().optional(),
+    secondaryCtaHref: z.string().optional(),
+    image: imageFieldSchema,
+    backgroundImage: imageFieldSchema,
+    backgroundImageAlt: z.string().optional(),
+    floatingLabel: z.string().optional(),
+  })
+  .passthrough();
+
+const cardSchema = z
+  .object({
+    key: z.string().optional(),
+    title: z.string().optional(),
+    body: z.string().optional(),
+    description: z.string().optional(),
+    value: z.string().optional(),
+    eyebrow: z.string().optional(),
+    image: imageFieldSchema,
+    imageAlt: z.string().optional(),
+    href: z.string().optional(),
+    meta: z.string().optional(),
+  })
+  .passthrough();
+
+export const pageSectionSchema = z
+  .object({
+    key: z.string().min(1),
+    eyebrow: z.string().optional(),
+    heading: z.string().optional(),
+    subheading: z.string().optional(),
+    body: z.string().optional(),
+    items: z.array(z.string()).optional(),
+    lists: z.array(z.array(z.string())).optional(),
+    images: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({
+            src: z.string().optional(),
+            url: z.string().optional(),
+            alt: z.string().optional(),
+          }),
+        ]),
+      )
+      .optional(),
+    ctaLabel: z.string().optional(),
+    ctaHref: z.string().optional(),
+    primaryCtaLabel: z.string().optional(),
+    primaryCtaHref: z.string().optional(),
+    secondaryCtaLabel: z.string().optional(),
+    secondaryCtaHref: z.string().optional(),
+    primaryImage: imageFieldSchema,
+    primaryImageAlt: z.string().optional(),
+    secondaryImage: imageFieldSchema,
+    secondaryImageAlt: z.string().optional(),
+    backgroundImage: imageFieldSchema,
+    backgroundImageAlt: z.string().optional(),
+    cards: z.array(cardSchema).optional(),
+    visible: z.boolean().optional(),
+    order: z.number().optional(),
+  })
+  .passthrough();
 
 export const loginSchema = z.object({
   email: z.string().email(),
@@ -51,51 +134,9 @@ export const contactFormSchema = z.object({
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
 export const contactSchema = contactFormSchema;
 
-export const pageSectionSchema = z.object({
-  key: z.string().min(1),
-  eyebrow: z.string().optional(),
-  heading: z.string().optional(),
-  subheading: z.string().optional(),
-  body: z.string().optional(),
-  lists: z.array(z.array(z.string())).optional(),
-  ctaLabel: z.string().optional(),
-  ctaHref: z.string().optional(),
-  secondaryCtaLabel: z.string().optional(),
-  secondaryCtaHref: z.string().optional(),
-  primaryImage: imageRefSchema.optional().nullable(),
-  secondaryImage: imageRefSchema.optional().nullable(),
-  backgroundImage: imageRefSchema.optional().nullable(),
-  cards: z
-    .array(
-      z.object({
-        key: z.string().optional(),
-        title: z.string().optional(),
-        body: z.string().optional(),
-        eyebrow: z.string().optional(),
-        image: imageRefSchema.optional().nullable(),
-        href: z.string().optional(),
-        meta: z.string().optional(),
-      }),
-    )
-    .optional(),
-  visible: z.boolean().optional(),
-  order: z.number().optional(),
-});
-
 export const pageUpdateSchema = z.object({
   name: z.string().optional(),
-  hero: z
-    .object({
-      eyebrow: z.string().optional(),
-      heading: z.string().optional(),
-      subheading: z.string().optional(),
-      body: z.string().optional(),
-      primaryCta: ctaSchema.optional(),
-      secondaryCta: ctaSchema.optional(),
-      image: imageRefSchema.optional().nullable(),
-      backgroundImage: imageRefSchema.optional().nullable(),
-    })
-    .optional(),
+  hero: heroSchema.optional(),
   sections: z.array(pageSectionSchema).optional(),
   section: pageSectionSchema.optional(),
   seo: seoSchema.optional(),
