@@ -16,10 +16,7 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  const services = await getPublishedServices();
-  return services.map((s) => ({ slug: s.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

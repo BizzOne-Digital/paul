@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = "/brand/logo-symbol-light.svg";
+const HEADER_LOGO_SRC = "/brand/logo-symbol-header.png";
 
 function brandTitleLines(name: string): [string, string?] {
   const words = name.trim().split(/\s+/);
@@ -62,11 +62,11 @@ export function SiteBrandMark({
       )}
     >
       <Image
-        src={LOGO_SRC}
+        src={HEADER_LOGO_SRC}
         alt=""
-        width={44}
-        height={52}
-        className="h-9 w-auto shrink-0 sm:h-11"
+        width={48}
+        height={48}
+        className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
         priority
       />
       <span className="font-serif truncate text-[0.92rem] leading-tight tracking-[0.01em] sm:text-[1.05rem] md:text-[1.2rem]">

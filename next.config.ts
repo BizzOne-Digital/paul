@@ -12,10 +12,7 @@ const nextConfig: NextConfig = {
     ],
     localPatterns: [
       {
-        pathname: "/api/uploads/**",
-      },
-      {
-        pathname: "/brand/**",
+        pathname: "/**",
       },
     ],
     formats: ["image/avif", "image/webp"],

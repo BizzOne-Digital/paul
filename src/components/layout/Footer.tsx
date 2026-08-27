@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
-import { BROKERAGE_COMPLIANCE } from "@/lib/constants";
+import { BrokerageComplianceMark } from "@/components/layout/BrokerageComplianceMark";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { cn, formatPhoneDisplay } from "@/lib/utils";
 import type { NavItem, ServiceNavItem } from "@/components/layout/Header";
@@ -199,17 +198,8 @@ export function Footer({
         </div>
 
         <div className="border-t border-champagne/35">
-          <div className="flex flex-col items-center px-2 py-6 text-center sm:py-7">
-            <Image
-              src={BROKERAGE_COMPLIANCE.logoSrc}
-              alt={BROKERAGE_COMPLIANCE.logoAlt}
-              width={360}
-              height={52}
-              className="h-7 w-auto max-w-[min(100%,16rem)] object-contain sm:h-8 sm:max-w-[18rem]"
-            />
-            <p className="mt-2.5 max-w-xl text-[0.68rem] leading-relaxed text-ivory/70 sm:text-xs">
-              {BROKERAGE_COMPLIANCE.licenseeLine}
-            </p>
+          <div className="flex flex-col items-center px-2 py-6 sm:py-7">
+            <BrokerageComplianceMark variant="footer" />
           </div>
         </div>
 

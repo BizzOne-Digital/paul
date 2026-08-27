@@ -1,7 +1,8 @@
 /** Curated Unsplash URLs used as replaceable stock placeholders (BC wine-country aesthetic). */
 export const STOCK = {
-  /** Local cinematic hero art supplied for the homepage */
-  heroVineyard: "/images/hero-vineyard.png",
+  /** Cinematic hero — remote URL (local /images copy optional for self-hosting) */
+  heroVineyard:
+    "https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?auto=format&fit=crop&w=2000&q=80",
   aerialVineyard:
     "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=2000&q=80",
   vineyardRows:

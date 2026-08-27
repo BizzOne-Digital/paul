@@ -13,7 +13,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
+import { BrokerageComplianceMark } from "@/components/layout/BrokerageComplianceMark";
 import { STOCK } from "@/lib/images";
 import { cn, formatPhoneDisplay } from "@/lib/utils";
 
@@ -125,8 +125,8 @@ function HeaderInner({
           : "border-b border-champagne/40 bg-gradient-to-b from-aubergine/75 via-aubergine/35 to-transparent",
       )}
     >
-      <div className="mx-auto flex h-[4.25rem] w-full max-w-[90rem] items-center justify-between gap-3 px-4 sm:h-[4.85rem] sm:gap-4 sm:px-5 md:px-8 lg:px-10">
-        <SiteBrandMark websiteName={websiteName} variant="header" />
+      <div className="mx-auto flex min-h-[4.25rem] w-full max-w-[90rem] items-center justify-between gap-3 px-4 py-2 sm:min-h-[4.85rem] sm:gap-4 sm:px-5 md:px-8 lg:px-10">
+        <BrokerageComplianceMark variant="header" className="relative z-10 shrink-0" />
 
         <nav
           className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 xl:flex"
@@ -256,12 +256,8 @@ function HeaderInner({
               <div className="absolute inset-0 bg-gradient-to-b from-aubergine via-aubergine/90 to-aubergine" />
             </div>
 
-            <div className="relative z-10 flex items-center justify-between gap-3 px-5 pt-5">
-              <SiteBrandMark
-                websiteName={websiteName}
-                variant="header"
-                className="min-w-0 flex-initial"
-              />
+            <div className="relative z-10 flex items-start justify-between gap-3 px-5 pt-5">
+              <BrokerageComplianceMark variant="header" className="min-w-0 flex-1" />
               <button
                 ref={closeBtnRef}
                 type="button"
