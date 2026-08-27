@@ -113,3 +113,11 @@ export const FAQ_CATEGORIES = [
 
 export const SESSION_COOKIE = "bcwba_session";
 export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+
+/** BC real estate regulatory footer — required on all public pages. */
+export const BROKERAGE_COMPLIANCE = {
+  logoSrc: "/brand/faith-wilson-christies-logo.png",
+  logoAlt: "Faith Wilson Christie's International Real Estate",
+  licenseeLine:
+    "Paul Graydon - 1156A Ellis Street, Kelowna, BC, V1Y 0J5",
+} as const;
