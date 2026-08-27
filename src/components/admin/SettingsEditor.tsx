@@ -13,6 +13,21 @@ import {
 import { isValidHttpUrl } from "@/lib/utils";
 import type { SiteSettingsFields } from "@/lib/types";
 
+function formatApiError(json: {
+  error?: string;
+  issues?: Array<{ path?: Array<string | number>; message?: string }>;
+}) {
+  if (!json.issues?.length) return json.error || "Save failed";
+  const detail = json.issues
+    .slice(0, 3)
+    .map((issue) => {
+      const path = issue.path?.length ? issue.path.join(".") : "field";
+      return `${path}: ${issue.message || "invalid"}`;
+    })
+    .join("; ");
+  return `${json.error || "Save failed"} — ${detail}`;
+}
+
 export function SettingsEditor({ initial }: { initial: SiteSettingsFields }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -32,8 +47,18 @@ export function SettingsEditor({ initial }: { initial: SiteSettingsFields }) {
         body: JSON.stringify(form),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Save failed");
-      setForm({ ...form, ...data.settings });
+      if (!res.ok) throw new Error(formatApiError(data));
+      if (data.settings) {
+        setForm((prev) => ({
+          ...prev,
+          ...data.settings,
+          logoUrl: data.settings.logoUrl ?? prev.logoUrl ?? "",
+          logoLightUrl: data.settings.logoLightUrl ?? prev.logoLightUrl ?? "",
+          faviconUrl: data.settings.faviconUrl ?? prev.faviconUrl ?? "",
+          defaultSeoKeywords:
+            data.settings.defaultSeoKeywords ?? prev.defaultSeoKeywords ?? "",
+        }));
+      }
       toast({ title: "Settings saved", tone: "success" });
       router.refresh();
     } catch (error) {

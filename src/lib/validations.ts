@@ -246,36 +246,92 @@ export const leadUpdateSchema = z.object({
 /** Alias expected by admin lead forms/APIs. */
 export const leadStatusSchema = leadUpdateSchema;
 
-export const settingsSchema = z.object({
-  websiteName: z.string().min(2).max(120),
-  legalBusinessName: z.string().max(160).optional().or(z.literal("")),
-  logo: z.string().optional().or(z.literal("")),
-  logoLight: z.string().optional().or(z.literal("")),
-  favicon: z.string().optional().or(z.literal("")),
-  logoUrl: z.string().optional().or(z.literal("")),
-  logoLightUrl: z.string().optional().or(z.literal("")),
-  faviconUrl: z.string().optional().or(z.literal("")),
-  companyDescription: z.string().max(2000).optional().or(z.literal("")),
-  email: z.string().email(),
-  phone: z.string().min(7),
-  phoneTel: z.string().optional().or(z.literal("")),
-  phoneHref: z.string().optional().or(z.literal("")),
-  socialHandle: z.string().optional().or(z.literal("")),
-  socialPlatform: z.string().optional().or(z.literal("")),
-  socialUrl: z.string().optional().or(z.literal("")),
-  serviceArea: z.string().optional().or(z.literal("")),
-  businessHours: z.string().optional().or(z.literal("")),
-  headerCtaLabel: z.string().optional().or(z.literal("")),
-  headerCtaHref: z.string().optional().or(z.literal("")),
-  footerCtaLabel: z.string().optional().or(z.literal("")),
-  footerCtaHref: z.string().optional().or(z.literal("")),
-  complimentaryConsultationText: z.string().optional().or(z.literal("")),
-  defaultSeoTitle: z.string().optional().or(z.literal("")),
-  defaultSeoDescription: z.string().optional().or(z.literal("")),
-  defaultSeoKeywords: z.string().optional().or(z.literal("")),
-  legalDisclaimer: z.string().optional().or(z.literal("")),
-  copyright: z.string().optional().or(z.literal("")),
-  copyrightText: z.string().optional().or(z.literal("")),
-  googleMapsUrl: z.string().optional().or(z.literal("")),
-  tagline: z.string().optional().or(z.literal("")),
+const SETTINGS_STRING_FIELDS = [
+  "legalBusinessName",
+  "logo",
+  "logoLight",
+  "favicon",
+  "logoUrl",
+  "logoLightUrl",
+  "faviconUrl",
+  "companyDescription",
+  "phoneTel",
+  "phoneHref",
+  "socialHandle",
+  "socialPlatform",
+  "socialUrl",
+  "serviceArea",
+  "businessHours",
+  "headerCtaLabel",
+  "headerCtaHref",
+  "footerCtaLabel",
+  "footerCtaHref",
+  "complimentaryConsultationText",
+  "defaultSeoTitle",
+  "defaultSeoDescription",
+  "defaultSeoKeywords",
+  "legalDisclaimer",
+  "copyright",
+  "copyrightText",
+  "googleMapsUrl",
+  "tagline",
+] as const;
+
+function normalizeSettingsBody(input: unknown) {
+  if (!input || typeof input !== "object") return input;
+  const raw = { ...(input as Record<string, unknown>) };
+  for (const key of SETTINGS_STRING_FIELDS) {
+    if (raw[key] === null || raw[key] === undefined) {
+      raw[key] = "";
+    }
+  }
+  if (raw.websiteName === null || raw.websiteName === undefined) {
+    raw.websiteName = "";
+  }
+  if (raw.email === null || raw.email === undefined) {
+    raw.email = "";
+  }
+  if (raw.phone === null || raw.phone === undefined) {
+    raw.phone = "";
+  }
+  return raw;
+}
+
+const settingsObjectSchema = z.object({
+  websiteName: z.string().trim().min(2).max(120),
+  legalBusinessName: z.string().max(160),
+  logo: z.string(),
+  logoLight: z.string(),
+  favicon: z.string(),
+  logoUrl: z.string(),
+  logoLightUrl: z.string(),
+  faviconUrl: z.string(),
+  companyDescription: z.string().max(2000),
+  email: z.string().trim().email(),
+  phone: z.string().trim().min(7),
+  phoneTel: z.string(),
+  phoneHref: z.string(),
+  socialHandle: z.string(),
+  socialPlatform: z.string(),
+  socialUrl: z.string(),
+  serviceArea: z.string(),
+  businessHours: z.string(),
+  headerCtaLabel: z.string(),
+  headerCtaHref: z.string(),
+  footerCtaLabel: z.string(),
+  footerCtaHref: z.string(),
+  complimentaryConsultationText: z.string(),
+  defaultSeoTitle: z.string(),
+  defaultSeoDescription: z.string(),
+  defaultSeoKeywords: z.string(),
+  legalDisclaimer: z.string(),
+  copyright: z.string(),
+  copyrightText: z.string(),
+  googleMapsUrl: z.string(),
+  tagline: z.string(),
 });
+
+export const settingsSchema = z.preprocess(
+  normalizeSettingsBody,
+  settingsObjectSchema,
+);

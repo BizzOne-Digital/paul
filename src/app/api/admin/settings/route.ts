@@ -49,7 +49,14 @@ export async function PUT(request: Request) {
     const body = settingsSchema.parse(await request.json());
     const settings = await SiteSettings.findOneAndUpdate(
       { singletonKey: "default" },
-      { $set: body },
+      {
+        $set: {
+          ...body,
+          logo: body.logoUrl || body.logo || DEFAULT_SETTINGS.logo,
+          logoLight: body.logoLightUrl || body.logoLight || DEFAULT_SETTINGS.logoLight,
+          favicon: body.faviconUrl || body.favicon || DEFAULT_SETTINGS.favicon,
+        },
+      },
       { upsert: true, new: true, setDefaultsOnInsert: true },
     );
     revalidateSettings();

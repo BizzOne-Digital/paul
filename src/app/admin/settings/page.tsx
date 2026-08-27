@@ -46,6 +46,9 @@ function toEditorSettings(doc: Record<string, unknown> | null): SiteSettingsFiel
     defaultSeoDescription: String(
       doc?.defaultSeoDescription || DEFAULT_SETTINGS.defaultSeoDescription,
     ),
+    defaultSeoKeywords: String(
+      doc?.defaultSeoKeywords || DEFAULT_SETTINGS.defaultSeoKeywords,
+    ),
     legalDisclaimer: String(
       doc?.legalDisclaimer || DEFAULT_SETTINGS.legalDisclaimer,
     ),
@@ -84,6 +87,7 @@ export default async function AdminSettingsPage() {
         DEFAULT_SETTINGS.complimentaryConsultationText,
       defaultSeoTitle: DEFAULT_SETTINGS.defaultSeoTitle,
       defaultSeoDescription: DEFAULT_SETTINGS.defaultSeoDescription,
+      defaultSeoKeywords: DEFAULT_SETTINGS.defaultSeoKeywords,
       legalDisclaimer: DEFAULT_SETTINGS.legalDisclaimer,
       copyrightText: DEFAULT_SETTINGS.copyright,
       googleMapsUrl: DEFAULT_SETTINGS.googleMapsUrl,
