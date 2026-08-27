@@ -158,7 +158,7 @@ async function main() {
 
   await SiteSettings.create({
     singletonKey: "default",
-    websiteName: "BC Winery Buyer Advisory",
+    websiteName: "BC Winery Buyer Guide",
     legalBusinessName: "",
     logo: "/brand/logo-symbol.svg",
     logoLight: "/brand/logo-symbol-light.svg",

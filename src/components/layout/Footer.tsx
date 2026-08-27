@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { BROKERAGE_COMPLIANCE } from "@/lib/constants";
+import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { cn, formatPhoneDisplay } from "@/lib/utils";
 import type { NavItem, ServiceNavItem } from "@/components/layout/Header";
 
@@ -102,23 +103,14 @@ export function Footer({
         <div className="grid gap-10 py-12 sm:py-14 md:grid-cols-2 md:py-16 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-champagne/30">
           {/* Brand */}
           <div className="md:col-span-2 lg:col-span-1 lg:pr-8">
-            <Link href="/" className="inline-flex flex-col gap-3 sm:gap-4">
-              <Image
-                src="/brand/logo-symbol-light.svg"
-                alt=""
-                width={56}
-                height={64}
-                className="h-12 w-auto sm:h-14"
-              />
-              <span className="font-serif text-lg tracking-[0.04em] text-ivory uppercase sm:text-xl md:text-[1.35rem]">
-                {websiteName}
-              </span>
-            </Link>
-            <div className="mt-4 h-px w-14 bg-champagne/80" aria-hidden="true" />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ivory/65">
-              {companyDescription ||
-                "Buyer-focused information and professional consulting support for winery and vineyard acquisitions across British Columbia."}
-            </p>
+            <SiteBrandMark
+              websiteName={websiteName}
+              companyDescription={
+                companyDescription ||
+                "Buyer-focused information and professional consulting support for winery and vineyard acquisitions across British Columbia."
+              }
+              variant="footer"
+            />
           </div>
 
           {/* Explore */}

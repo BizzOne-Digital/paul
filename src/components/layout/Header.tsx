@@ -13,6 +13,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { STOCK } from "@/lib/images";
 import { cn, formatPhoneDisplay } from "@/lib/utils";
 
@@ -125,22 +126,7 @@ function HeaderInner({
       )}
     >
       <div className="mx-auto flex h-[4.25rem] w-full max-w-[90rem] items-center justify-between gap-3 px-4 sm:h-[4.85rem] sm:gap-4 sm:px-5 md:px-8 lg:px-10">
-        <Link
-          href="/"
-          className="relative z-10 flex min-w-0 flex-1 items-center gap-2.5 text-ivory sm:gap-3 sm:flex-initial"
-        >
-          <Image
-            src="/brand/logo-symbol-light.svg"
-            alt=""
-            width={42}
-            height={48}
-            className="h-9 w-auto shrink-0 sm:h-11"
-            priority
-          />
-          <span className="font-serif truncate text-[0.92rem] leading-tight tracking-[0.01em] sm:text-[1.05rem] md:text-[1.2rem]">
-            {websiteName}
-          </span>
-        </Link>
+        <SiteBrandMark websiteName={websiteName} variant="header" />
 
         <nav
           className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 xl:flex"
@@ -270,8 +256,12 @@ function HeaderInner({
               <div className="absolute inset-0 bg-gradient-to-b from-aubergine via-aubergine/90 to-aubergine" />
             </div>
 
-            <div className="relative z-10 flex items-center justify-between px-5 pt-5">
-              <span className="font-serif text-xl text-ivory">{websiteName}</span>
+            <div className="relative z-10 flex items-center justify-between gap-3 px-5 pt-5">
+              <SiteBrandMark
+                websiteName={websiteName}
+                variant="header"
+                className="min-w-0 flex-initial"
+              />
               <button
                 ref={closeBtnRef}
                 type="button"

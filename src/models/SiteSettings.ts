@@ -6,7 +6,7 @@ const SiteSettingsSchema = new Schema(
     websiteName: {
       type: String,
       required: true,
-      default: "BC Winery Buyer Advisory",
+      default: "BC Winery Buyer Guide",
     },
     legalBusinessName: { type: String, default: "" },
     logo: { type: String, default: "/brand/logo-symbol.svg" },

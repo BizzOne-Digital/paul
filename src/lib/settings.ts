@@ -32,7 +32,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  websiteName: "BC Winery Buyer Advisory",
+  websiteName: "BC Winery Buyer Guide",
   legalBusinessName: "",
   logo: "/brand/logo-symbol.svg",
   logoLight: "/brand/logo-symbol-light.svg",
