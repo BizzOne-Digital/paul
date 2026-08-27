@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    localPatterns: [
+      {
+        pathname: "/api/uploads/**",
+      },
+      {
+        pathname: "/brand/**",
+      },
+    ],
     formats: ["image/avif", "image/webp"],
   },
   experimental: {

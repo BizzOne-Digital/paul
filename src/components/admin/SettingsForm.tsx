@@ -102,9 +102,9 @@ export function SettingsForm({ initial }: { initial: SiteSettings }) {
         </div>
 
         <div className={`${panelClass} grid gap-6 md:grid-cols-3`}>
-          <ImageUploader category="settings" label="Logo" value={form.logo} onChange={(url) => set("logo", url || "/brand/logo-symbol.svg")} />
-          <ImageUploader category="settings" label="Logo light" value={form.logoLight} onChange={(url) => set("logoLight", url || "/brand/logo-symbol-light.svg")} />
-          <ImageUploader category="settings" label="Favicon" value={form.favicon} onChange={(url) => set("favicon", url || "/brand/favicon.svg")} />
+          <ImageUploader folder="misc" label="Logo" value={form.logo} onChange={(url) => set("logo", url || "/brand/logo-symbol.svg")} />
+          <ImageUploader folder="misc" label="Logo light" value={form.logoLight} onChange={(url) => set("logoLight", url || "/brand/logo-symbol-light.svg")} />
+          <ImageUploader folder="misc" label="Favicon" value={form.favicon} onChange={(url) => set("favicon", url || "/brand/favicon.svg")} />
         </div>
       </div>
     </>

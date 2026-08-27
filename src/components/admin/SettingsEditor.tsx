@@ -65,20 +65,20 @@ export function SettingsEditor({ initial }: { initial: SiteSettingsFields }) {
         <div className="grid gap-4 md:grid-cols-2">
           <ImageUploader
             label="Logo"
-            category="settings"
+            folder="misc"
             value={form.logoUrl}
             onChange={(url) => set("logoUrl", url || "")}
           />
           <ImageUploader
             label="Logo (light)"
-            category="settings"
+            folder="misc"
             value={form.logoLightUrl}
             onChange={(url) => set("logoLightUrl", url || "")}
           />
         </div>
         <ImageUploader
           label="Favicon"
-          category="settings"
+          folder="misc"
           value={form.faviconUrl}
           onChange={(url) => set("faviconUrl", url || "")}
         />

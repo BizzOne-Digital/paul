@@ -1,4 +1,8 @@
 import type { ImageRef } from "@/lib/types";
+import { STOCK } from "@/lib/images";
+import { isLegacyDiskUploadUrl } from "@/lib/upload-url";
+
+export const LEGACY_UPLOAD_PLACEHOLDER = STOCK.vineyardRows;
 
 export type MediaLike =
   | string
@@ -12,8 +16,15 @@ export type MediaLike =
 /** Resolve a URL from string or ImageRef-shaped values (seed + CMS). */
 export function mediaUrl(input?: MediaLike, fallback = ""): string {
   if (!input) return fallback;
-  if (typeof input === "string") return input || fallback;
-  return input.url || input.src || fallback;
+  const raw =
+    typeof input === "string"
+      ? input
+      : input.url || input.src || "";
+  if (!raw) return fallback;
+  if (isLegacyDiskUploadUrl(raw)) {
+    return fallback || LEGACY_UPLOAD_PLACEHOLDER;
+  }
+  return raw;
 }
 
 export function mediaAlt(input?: MediaLike, fallback = ""): string {

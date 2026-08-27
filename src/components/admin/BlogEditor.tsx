@@ -178,7 +178,7 @@ export function BlogEditor({ initial, id }: { initial: BlogForm; id?: string }) 
         </div>
         <ImageUploader
           label="Cover image"
-          category="blog"
+          folder="gallery"
           value={mediaUrl(form.coverImage)}
           onChange={(url) => setForm((p) => ({ ...p, coverImage: url || "" }))}
         />
@@ -277,7 +277,7 @@ export function BlogEditor({ initial, id }: { initial: BlogForm; id?: string }) 
             {(section.type === "image" || section.image) && (
               <ImageUploader
                 label="Section image"
-                category="blog"
+                folder="gallery"
                 value={mediaUrl(section.image)}
                 onChange={(url) => updateSection(index, { image: url || "" })}
               />

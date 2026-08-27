@@ -341,7 +341,7 @@ export function PageEditor({
               </div>
               <ImageUploader
                 label="Hero background image"
-                category="pages"
+                folder="pages"
                 value={
                   typeof data.hero.backgroundImage === "string"
                     ? data.hero.backgroundImage

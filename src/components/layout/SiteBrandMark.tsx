@@ -32,13 +32,6 @@ export function SiteBrandMark({
         href="/"
         className={cn("inline-flex max-w-sm flex-col items-start gap-4", className)}
       >
-        <Image
-          src={LOGO_SRC}
-          alt=""
-          width={72}
-          height={84}
-          className="h-14 w-auto sm:h-16"
-        />
         <div>
           <p className="font-serif text-lg leading-tight tracking-[0.06em] text-ivory uppercase sm:text-xl md:text-[1.35rem]">
             {lineOne}

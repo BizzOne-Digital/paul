@@ -178,7 +178,10 @@ export type NavServiceLink = {
   slug: string;
 };
 
-export type UploadCategory = "pages" | "services" | "blog" | "settings";
+export type UploadFolder = "products" | "gallery" | "pages" | "misc";
+
+/** @deprecated Use UploadFolder */
+export type UploadCategory = UploadFolder;
 
 export type SessionPayload = {
   sub: string;

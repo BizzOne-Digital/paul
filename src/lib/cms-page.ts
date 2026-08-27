@@ -48,8 +48,11 @@ export function buildHomeHero(
       hero.secondaryCtaHref ||
       hero.secondaryCta?.href ||
       "/services",
-    backgroundImage: backgroundImagePath.startsWith("/uploads/")
-      ? backgroundImagePath
-      : backgroundImagePath || STOCK.heroVineyard,
+    backgroundImage:
+      backgroundImagePath.startsWith("/api/uploads/")
+        ? backgroundImagePath
+        : backgroundImagePath.startsWith("/uploads/")
+          ? STOCK.heroVineyard
+          : backgroundImagePath || STOCK.heroVineyard,
   };
 }

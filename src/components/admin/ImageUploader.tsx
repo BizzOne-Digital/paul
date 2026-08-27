@@ -5,26 +5,57 @@ import Image from "next/image";
 import { ImagePlus, Trash2, Replace } from "lucide-react";
 import { useToast } from "@/components/admin/ToastProvider";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
-import type { UploadCategory } from "@/lib/types";
+import type { UploadFolder } from "@/lib/types";
+import { isStoredUploadUrl } from "@/lib/upload-url";
 import { cn } from "@/lib/utils";
 
 type ImageUploaderProps = {
   label?: string;
   value?: string | null;
   alt?: string;
-  category: UploadCategory;
+  folder: UploadFolder;
+  /** @deprecated Use folder */
+  category?: UploadFolder;
   onChange: (url: string | null) => void;
   className?: string;
 };
+
+const ACCEPT = "image/jpeg,image/png,image/webp,image/gif";
+
+function usesUnoptimizedImage(url: string) {
+  return url.startsWith("/api/uploads/") || url.startsWith("/uploads/");
+}
+
+async function deleteStoredUrl(url: string, force = false) {
+  const res = await fetch("/api/upload", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, force }),
+  });
+  const data = await res.json();
+  if (res.status === 409) {
+    return { ok: false, references: data.references as string[] | undefined };
+  }
+  if (!res.ok) {
+    throw new Error(data.error || "Delete failed");
+  }
+  return { ok: true as const };
+}
 
 export function ImageUploader({
   label = "Image",
   value,
   alt,
+  folder,
   category,
   onChange,
   className,
 }: ImageUploaderProps) {
+  const uploadFolder = folder || category;
+  if (!uploadFolder) {
+    throw new Error("ImageUploader requires a folder prop");
+  }
+
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
@@ -33,14 +64,25 @@ export function ImageUploader({
 
   async function upload(file: File) {
     setUploading(true);
+    const previous = value;
     try {
       const body = new FormData();
       body.append("file", file);
-      body.append("category", category);
-      const res = await fetch("/api/admin/upload", { method: "POST", body });
+      body.append("folder", uploadFolder);
+      const res = await fetch("/api/upload", { method: "POST", body });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
+
       onChange(data.url);
+
+      if (previous && isStoredUploadUrl(previous) && previous !== data.url) {
+        try {
+          await deleteStoredUrl(previous, true);
+        } catch {
+          // Replacement succeeded; stale blob cleanup is best-effort.
+        }
+      }
+
       toast({ title: "Image uploaded", tone: "success" });
     } catch (error) {
       toast({
@@ -62,23 +104,19 @@ export function ImageUploader({
     }
     setRemoving(true);
     try {
-      const res = await fetch("/api/admin/upload", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: value, force: false }),
-      });
-      const data = await res.json();
-      if (res.status === 409) {
-        toast({
-          title: "Image still referenced",
-          description: (data.references || []).join(", "),
-          tone: "error",
-        });
-        onChange(null);
-        setConfirmOpen(false);
-        return;
+      if (isStoredUploadUrl(value)) {
+        const result = await deleteStoredUrl(value, false);
+        if (!result.ok) {
+          toast({
+            title: "Image still referenced",
+            description: (result.references || []).join(", "),
+            tone: "error",
+          });
+          onChange(null);
+          setConfirmOpen(false);
+          return;
+        }
       }
-      if (!res.ok) throw new Error(data.error || "Delete failed");
       onChange(null);
       toast({ title: "Image removed", tone: "success" });
       setConfirmOpen(false);
@@ -124,7 +162,7 @@ export function ImageUploader({
       <input
         ref={inputRef}
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml"
+        accept={ACCEPT}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
@@ -139,7 +177,7 @@ export function ImageUploader({
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 480px"
-            unoptimized={value.startsWith("/uploads/")}
+            unoptimized={usesUnoptimizedImage(value)}
           />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-charcoal/45">
@@ -150,7 +188,7 @@ export function ImageUploader({
       <ConfirmDialog
         open={confirmOpen}
         title="Remove image?"
-        description="This clears the field and attempts to delete the file if it is not referenced elsewhere."
+        description="This clears the field and deletes the stored file when it is not referenced elsewhere."
         confirmLabel="Remove"
         tone="danger"
         loading={removing}
@@ -160,3 +198,6 @@ export function ImageUploader({
     </div>
   );
 }
+
+/** Alias for CMS/admin image fields backed by MongoDB stored uploads. */
+export const LocalImageField = ImageUploader;

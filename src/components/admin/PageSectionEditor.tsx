@@ -99,7 +99,7 @@ export function PageSectionEditor({ section, onChange }: Props) {
       </div>
       <ImageUploader
         label="Primary image"
-        category="pages"
+        folder="pages"
         value={mediaUrl(section.primaryImage)}
         onChange={(url) =>
           onChange({
@@ -111,7 +111,7 @@ export function PageSectionEditor({ section, onChange }: Props) {
       />
       <ImageUploader
         label="Secondary image"
-        category="pages"
+        folder="pages"
         value={mediaUrl(section.secondaryImage)}
         onChange={(url) =>
           onChange({
@@ -123,7 +123,7 @@ export function PageSectionEditor({ section, onChange }: Props) {
       />
       <ImageUploader
         label="Background image"
-        category="pages"
+        folder="pages"
         value={mediaUrl(section.backgroundImage)}
         onChange={(url) =>
           onChange({

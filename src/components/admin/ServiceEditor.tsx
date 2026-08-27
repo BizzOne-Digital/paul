@@ -103,7 +103,7 @@ export function ServiceEditor({
           <TextArea label="Short description" value={form.shortDescription} onChange={(v) => setForm((p) => ({ ...p, shortDescription: v }))} />
           <ImageUploader
             label="Card image"
-            category="services"
+            folder="products"
             value={mediaUrl(form.listingImage)}
             onChange={(url) =>
               setForm((p) => ({
@@ -136,7 +136,7 @@ export function ServiceEditor({
           <TextArea label="Hero body" value={detail.hero?.body || ""} onChange={(v) => setForm((p) => ({ ...p, detailPage: { ...p.detailPage, hero: { ...p.detailPage?.hero, body: v } } }))} />
           <ImageUploader
             label="Hero image"
-            category="services"
+            folder="products"
             value={mediaUrl(detail.hero?.image)}
             onChange={(url) =>
               setForm((p) => ({
