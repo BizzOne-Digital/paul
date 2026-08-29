@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CinematicHero } from "@/components/sections/CinematicHero";
@@ -71,7 +71,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <article className="group">
                     <Link href={`/blog/${post.slug}`}>
                       <div className="relative aspect-[16/10] overflow-hidden">
-                        <Image
+                        <CmsImage
                           src={imageSrc(post.coverImage, STOCK.goldenHour)}
                           alt={
                             post.coverImageAlt ||
@@ -112,7 +112,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                 <article className="group flex h-full flex-col">
                   <Link href={`/blog/${post.slug}`}>
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
+                      <CmsImage
                         src={imageSrc(post.coverImage, STOCK.goldenHour)}
                         alt={
                           post.coverImageAlt ||

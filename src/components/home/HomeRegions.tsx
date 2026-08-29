@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -80,7 +80,7 @@ export function HomeRegions({ section }: HomeRegionsProps) {
               className="group overflow-hidden border border-aubergine/10 bg-white/70 shadow-[0_18px_50px_-36px_rgba(33,19,40,0.55)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-plum/20">
-                <Image
+                <CmsImage
                   src={src}
                   alt={alt}
                   fill

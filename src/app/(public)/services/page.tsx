@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import { CinematicHero } from "@/components/sections/CinematicHero";
 import { ServicesHorizontal } from "@/components/services/ServicesHorizontal";
@@ -84,7 +84,7 @@ export default async function ServicesPage() {
               <Reveal key={service._id} delay={index * 0.04}>
                 <article className="overflow-hidden border border-aubergine/10 bg-white/30">
                   <div className="relative aspect-[16/10]">
-                    <Image
+                    <CmsImage
                       src={imageSrc(service.listingImage, STOCK.vineyardRows)}
                       alt={
                         service.listingImageAlt ||
@@ -261,7 +261,7 @@ export default async function ServicesPage() {
 
       {cta ? (
         <section className="relative overflow-hidden py-24">
-          <Image
+          <CmsImage
             src={imageSrc(cta.backgroundImage, STOCK.duskVineyard)}
             alt={
               (cta as { backgroundImageAlt?: string }).backgroundImageAlt ||

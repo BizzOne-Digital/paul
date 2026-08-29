@@ -1,7 +1,8 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { motion, useReducedMotion } from "framer-motion";
+import type { ImageProps } from "next/image";
 import { cn } from "@/lib/utils";
 
 type ImageFrameProps = Omit<ImageProps, "alt" | "fill" | "width" | "height"> & {
@@ -46,7 +47,7 @@ export function ImageFrame({
           zoomOnHover && !reduced && "group",
         )}
       >
-        <Image
+        <CmsImage
           src={src}
           alt={alt}
           fill

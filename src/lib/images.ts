@@ -1,4 +1,6 @@
 /** Curated Unsplash URLs used as replaceable stock placeholders (BC wine-country aesthetic). */
+import { isLegacyDiskUploadUrl } from "@/lib/upload-url";
+
 export const STOCK = {
   /** Cinematic hero — remote URL (local /images copy optional for self-hosting) */
   heroVineyard:
@@ -47,8 +49,15 @@ export type ImageLike =
 
 export function imageSrc(image: ImageLike, fallback = ""): string {
   if (!image) return fallback;
-  if (typeof image === "string") return image || fallback;
-  return image.url || image.src || fallback;
+  const raw =
+    typeof image === "string"
+      ? image
+      : image.url || image.src || "";
+  if (!raw) return fallback;
+  if (isLegacyDiskUploadUrl(raw)) {
+    return fallback || STOCK.vineyardRows;
+  }
+  return raw;
 }
 
 export function imageAlt(image: ImageLike, fallback = ""): string {

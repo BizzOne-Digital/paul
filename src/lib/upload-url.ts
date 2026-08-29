@@ -15,6 +15,11 @@ export function isStoredUploadUrl(url: string): boolean {
   return /^\/api\/uploads\/[^/]+\/[^/]+$/.test(url);
 }
 
+/** CMS / MongoDB-backed uploads should bypass the Next.js image optimizer. */
+export function shouldUnoptimizeImage(url: string): boolean {
+  return isStoredUploadUrl(url) || isLegacyDiskUploadUrl(url);
+}
+
 export function isLegacyDiskUploadUrl(url: string): boolean {
   return url.startsWith("/uploads/");
 }

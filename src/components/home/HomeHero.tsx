@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { motion, useReducedMotion } from "framer-motion";
 import { Award, CalendarDays, MapPin, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -58,7 +58,7 @@ export function HomeHero({ hero }: HomeHeroProps) {
           animate={{ scale: 1 }}
           transition={{ duration: 10, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Image
+          <CmsImage
             src={bg || STOCK.heroVineyard}
             alt={alt}
             fill

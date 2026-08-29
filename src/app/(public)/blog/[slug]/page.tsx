@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -94,7 +94,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
 
       <article>
         <header className="relative min-h-[70vh] overflow-hidden bg-aubergine text-ivory">
-          <Image
+          <CmsImage
             src={cover}
             alt={
               post.coverImageAlt || imageAlt(post.coverImage, post.title)
@@ -209,7 +209,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                 <article key={item._id} className="group">
                   <Link href={`/blog/${item.slug}`}>
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
+                      <CmsImage
                         src={imageSrc(item.coverImage, STOCK.goldenHour)}
                         alt={
                           item.coverImageAlt ||

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -159,7 +159,7 @@ function ServiceCard({
             : "relative aspect-[16/10] overflow-hidden"
         }
       >
-        <Image
+        <CmsImage
           src={imageSrc(service.listingImage, STOCK.vineyardRows)}
           alt={
             service.listingImageAlt ||

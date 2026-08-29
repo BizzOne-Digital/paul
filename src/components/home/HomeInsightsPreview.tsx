@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -56,7 +56,7 @@ export function HomeInsightsPreview({
               <article className="group flex h-full flex-col">
                 <Link href={`/blog/${post.slug}`} className="block overflow-hidden">
                   <div className="relative aspect-[4/3] overflow-hidden bg-plum/10">
-                    <Image
+                    <CmsImage
                       src={mediaUrl(post.coverImage, STOCK.goldenHour)}
                       alt={mediaAlt(
                         post.coverImage,

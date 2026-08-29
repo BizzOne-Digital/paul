@@ -1,7 +1,8 @@
 "use client";
 
-import Image, { type ImageProps } from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { useEffect, useRef } from "react";
+import type { ImageProps } from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
@@ -56,7 +57,7 @@ export default function ParallaxImage({
       className={cn("relative overflow-hidden", frameClassName)}
     >
       <div ref={imageRef} className="relative h-[115%] w-full -translate-y-[7.5%]">
-        <Image
+        <CmsImage
           alt={alt}
           className={cn("h-full w-full object-cover", className)}
           {...imageProps}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CinematicHero } from "@/components/sections/CinematicHero";
@@ -258,7 +258,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <article key={item._id} className="group">
                   <Link href={`/services/${item.slug}`}>
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
+                      <CmsImage
                         src={imageSrc(item.listingImage, STOCK.vineyardRows)}
                         alt={
                           item.listingImageAlt ||

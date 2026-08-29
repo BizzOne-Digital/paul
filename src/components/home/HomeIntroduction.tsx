@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -112,7 +112,7 @@ export function HomeIntroduction({ section }: HomeIntroductionProps) {
                 }}
               >
                 <div className="group relative h-full min-h-[12rem] w-full overflow-hidden bg-plum/15 shadow-[0_18px_50px_-32px_rgba(33,19,40,0.55)]">
-                  <Image
+                  <CmsImage
                     src={item.src}
                     alt={item.alt}
                     fill

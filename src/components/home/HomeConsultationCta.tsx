@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import type { PageSection } from "@/lib/types";
@@ -15,7 +15,7 @@ export function HomeConsultationCta({ section }: HomeConsultationCtaProps) {
   return (
     <section className="relative overflow-x-clip py-16 sm:py-24 md:py-32">
       <div className="absolute inset-0">
-        <Image
+        <CmsImage
           src={mediaUrl(section.backgroundImage, STOCK.estateWinery)}
           alt={mediaAlt(
             section.backgroundImage,

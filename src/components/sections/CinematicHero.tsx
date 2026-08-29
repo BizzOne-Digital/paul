@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { Button } from "@/components/ui/Button";
 import { imageAlt, imageSrc, type ImageLike, STOCK } from "@/lib/images";
 import { cn } from "@/lib/utils";
@@ -43,7 +43,7 @@ export function CinematicHero({
         className,
       )}
     >
-      <Image
+      <CmsImage
         src={src}
         alt={alt}
         fill

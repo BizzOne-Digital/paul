@@ -6,7 +6,7 @@ import { ImagePlus, Trash2, Replace } from "lucide-react";
 import { useToast } from "@/components/admin/ToastProvider";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import type { UploadFolder } from "@/lib/types";
-import { isStoredUploadUrl } from "@/lib/upload-url";
+import { isStoredUploadUrl, shouldUnoptimizeImage } from "@/lib/upload-url";
 import { cn } from "@/lib/utils";
 
 type ImageUploaderProps = {
@@ -23,12 +23,13 @@ type ImageUploaderProps = {
 const ACCEPT = "image/jpeg,image/png,image/webp,image/gif";
 
 function usesUnoptimizedImage(url: string) {
-  return url.startsWith("/api/uploads/") || url.startsWith("/uploads/");
+  return shouldUnoptimizeImage(url);
 }
 
 async function deleteStoredUrl(url: string, force = false) {
   const res = await fetch("/api/upload", {
     method: "DELETE",
+    credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url, force }),
   });
@@ -69,7 +70,11 @@ export function ImageUploader({
       const body = new FormData();
       body.append("file", file);
       body.append("folder", uploadFolder);
-      const res = await fetch("/api/upload", { method: "POST", body });
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        credentials: "same-origin",
+        body,
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
 

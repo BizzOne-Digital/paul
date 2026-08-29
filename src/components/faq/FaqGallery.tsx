@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { CmsImage } from "@/components/ui/CmsImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { imageAlt, imageSrc, STOCK } from "@/lib/images";
 
@@ -27,7 +27,7 @@ export function FaqGallery({ images }: FaqGalleryProps) {
           return (
             <Reveal key={`${src}-${i}`} delay={Math.min(i * 0.04, 0.2)}>
               <div className="relative aspect-[4/3] overflow-hidden bg-plum/30">
-                <Image
+                <CmsImage
                   src={src}
                   alt={alt}
                   fill

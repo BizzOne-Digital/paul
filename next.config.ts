@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
     ],
     localPatterns: [
       {
+        pathname: "/api/uploads/**",
+      },
+      {
+        pathname: "/brand/**",
+      },
+      {
         pathname: "/**",
       },
     ],
