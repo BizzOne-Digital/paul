@@ -7,6 +7,7 @@ import { BlogFilters } from "@/components/blog/BlogFilters";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { BUYER_INSIGHTS_LABEL } from "@/lib/constants";
 import { getPageBySlug, getPublishedPosts, getSection } from "@/lib/data";
 import { absoluteUrl } from "@/lib/utils";
 import { imageAlt, imageSrc, STOCK } from "@/lib/images";
@@ -17,7 +18,7 @@ type PageProps = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug("blog");
-  const title = page?.seo?.title || "Buyer Insights";
+  const title = page?.seo?.title || BUYER_INSIGHTS_LABEL;
   const description =
     page?.seo?.description ||
     "Educational insights on buying a BC winery, vineyard due diligence, operations, and ownership transition.";
@@ -51,7 +52,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
   return (
     <>
       <CinematicHero
-        eyebrow={hero?.eyebrow}
+        eyebrow={hero?.eyebrow || BUYER_INSIGHTS_LABEL}
         heading={hero?.heading || "Insights for Prospective Winery Buyers"}
         subheading={hero?.subheading}
         backgroundImage={hero?.backgroundImage || STOCK.goldenHour}

@@ -585,7 +585,7 @@ async function main() {
       section(
         "insights-preview",
         {
-          eyebrow: "Buyer Insights",
+          eyebrow: "Buyer Insights and Seller Profiles",
           heading: "Latest Thinking for Prospective Buyers",
           ctaLabel: "Explore All Insights",
           ctaHref: "/blog",
@@ -822,11 +822,11 @@ async function main() {
   });
 
   await Page.create({
-    name: "Blog",
+    name: "Buyer Insights and Seller Profiles",
     slug: "blog",
     status: "published",
     hero: {
-      eyebrow: "Buyer Insights",
+      eyebrow: "Buyer Insights and Seller Profiles",
       heading: "Insights for Prospective Winery Buyers",
       subheading:
         "Educational articles to help you ask better questions about winery, vineyard, and wine-country acquisitions in British Columbia.",
@@ -834,7 +834,7 @@ async function main() {
       backgroundImageAlt: "Golden-hour vineyard landscape",
     },
     seo: {
-      title: "Buyer Insights | BC Winery Buyer Advisory",
+      title: "Buyer Insights and Seller Profiles | BC Winery Buyer Advisory",
       description:
         "Educational insights on buying a BC winery, vineyard due diligence, operations, financing themes, and ownership transition.",
     },
@@ -1283,7 +1283,7 @@ async function main() {
       featured: p.featured,
       status: "published",
       seo: {
-        title: `${p.title} | Buyer Insights`,
+        title: `${p.title} | Buyer Insights and Seller Profiles`,
         description: p.excerpt,
       },
       contentSections: p.sections.map((s, idx) => ({

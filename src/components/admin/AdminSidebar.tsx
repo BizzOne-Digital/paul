@@ -11,13 +11,14 @@ import {
   BriefcaseBusiness,
   HelpCircle,
 } from "lucide-react";
+import { BUYER_INSIGHTS_LABEL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const links = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/pages", label: "Pages", icon: FileText },
   { href: "/admin/services", label: "Services", icon: BriefcaseBusiness },
-  { href: "/admin/blog", label: "Blog", icon: Newspaper },
+  { href: "/admin/blog", label: BUYER_INSIGHTS_LABEL, icon: Newspaper },
   { href: "/admin/faqs", label: "FAQs", icon: HelpCircle },
   { href: "/admin/leads", label: "Leads", icon: MessageSquareText },
   { href: "/admin/settings", label: "Settings", icon: Settings },

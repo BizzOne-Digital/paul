@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "seed": "tsx --env-file=.env scripts/seed.ts",
     "update:email": "tsx --env-file=.env scripts/update-site-email.ts",
+    "update:buyer-insights-label": "tsx --env-file=.env scripts/update-buyer-insights-label.ts",
     "check:env": "tsx --env-file=.env scripts/check-env.ts",
     "postinstall": "node scripts/ensure-dirs.mjs"
   },

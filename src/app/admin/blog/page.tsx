@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { BlogManager } from "@/components/admin/BlogManager";
+import { BUYER_INSIGHTS_LABEL } from "@/lib/constants";
 import { getSession } from "@/lib/auth";
 import connectMongo from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
@@ -16,7 +17,7 @@ export default async function AdminBlogPage() {
 
   return (
     <>
-      <AdminHeader title="Blog" email={session?.email} />
+      <AdminHeader title={BUYER_INSIGHTS_LABEL} email={session?.email} />
       <main className="p-6">
         <BlogManager initial={posts as never} />
       </main>

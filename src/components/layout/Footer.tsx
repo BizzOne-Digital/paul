@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { BrokerageComplianceMark } from "@/components/layout/BrokerageComplianceMark";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
+import { BUYER_INSIGHTS_LABEL } from "@/lib/constants";
 import { cn, formatPhoneDisplay } from "@/lib/utils";
 import type { NavItem, ServiceNavItem } from "@/components/layout/Header";
 
@@ -77,7 +78,10 @@ export function Footer({
 
   const exploreItems = navItems.map((item) => ({
     ...item,
-    label: item.label === "Insights" ? "Buyer Insights" : item.label,
+    label:
+      item.label === "Insights" || item.label === "Buyer Insights"
+        ? BUYER_INSIGHTS_LABEL
+        : item.label,
   }));
 
   const serviceItems = services.slice(0, 4);

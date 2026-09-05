@@ -85,10 +85,12 @@ export const LEAD_STATUSES: LeadStatus[] = [
   "Not a Fit",
 ];
 
+export const BUYER_INSIGHTS_LABEL = "Buyer Insights and Seller Profiles";
+
 export const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Buyer Insights", href: "/blog" },
+  { label: BUYER_INSIGHTS_LABEL, href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -98,7 +100,7 @@ export const PAGE_SLUGS = [
   { name: "Services", slug: "services", path: "/services" },
   { name: "Contact", slug: "contact", path: "/contact" },
   { name: "FAQ", slug: "faq", path: "/faq" },
-  { name: "Blog", slug: "blog", path: "/blog" },
+  { name: BUYER_INSIGHTS_LABEL, slug: "blog", path: "/blog" },
 ] as const;
 
 export const PUBLISH_STATUSES = ["draft", "published"] as const;
